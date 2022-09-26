@@ -4,8 +4,8 @@ import Restaurant from "../models/restaurantModel";
 
 /**
  * @desc   Verify JWT
- * @param {async} handler
- * @param {string} accountType
+ * @param {async} handler Async function with req and res
+ * @param {string} accountType User or Restaurant
  */
 const verifyJwt = (handler, accountType) => {
   return async (req, res) => {
