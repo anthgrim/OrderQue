@@ -2,6 +2,11 @@ import jwt from "jsonwebtoken";
 import User from "../models/userModel";
 import Restaurant from "../models/restaurantModel";
 
+/**
+ * @desc   Verify JWT
+ * @param {async} handler
+ * @param {string} accountType
+ */
 const verifyJwt = (handler, accountType) => {
   return async (req, res) => {
     const authHeaders = req.headers.authorization || req.headers.authorization;
