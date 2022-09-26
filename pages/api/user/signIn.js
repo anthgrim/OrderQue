@@ -83,6 +83,7 @@ export default handler = async (req, res) => {
 
     return res.status(200).json({
       message: `Welcome, ${targetUser.firstName} ${targetUser.lastName}!`,
+      accessToken,
     });
   } catch (error) {
     return res.status(500).json({

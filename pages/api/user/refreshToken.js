@@ -1,7 +1,6 @@
 import connectDb from "../../../config/connectDb";
 import User from "../../../models/userModel";
 import jwt from "jsonwebtoken";
-import cookie from "cookie";
 
 /**
  * @desc   User refresh token endpoint
