@@ -12,9 +12,9 @@ import verifyJwt from "../../../middlewares/verifyJWT";
  */
 const handler = async (req, res) => {
   // Validate request method
-  if (req.method !== "POST") {
+  if (req.method !== "GET") {
     return res.status(400).json({
-      message: "Only POST method allowed",
+      message: "Only GET method allowed",
     });
   }
 
