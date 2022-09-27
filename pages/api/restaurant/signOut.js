@@ -10,7 +10,7 @@ import cookie from "cookie";
  * @param {import("next").NextApiRequest} req
  * @param {import("next").NextApiResponse} res
  */
-export default handler = async (req, res) => {
+export default async function handler(req, res) {
   // Validate request method
   if (req.method !== "POST") {
     return res.status(400).json({
@@ -71,4 +71,4 @@ export default handler = async (req, res) => {
       error,
     });
   }
-};
+}
