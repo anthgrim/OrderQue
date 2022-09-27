@@ -12,7 +12,7 @@ import cookie from "cookie";
  * @param {import("next").NextApiRequest} req
  * @param {import("next").NextApiResponse} res
  */
-export default handler = async (req, res) => {
+export default async function handler(req, res) {
   // Validate request method
   if (req.method !== "POST") {
     return res.status(400).json({
@@ -74,7 +74,7 @@ export default handler = async (req, res) => {
       "Set-Cookie",
       cookie.serialize("jwt", refreshToken, {
         httpOnly: true,
-        secure: true,
+        //secure: true,
         sameSite: "strict",
         maxAge: 24 * 60 * 60 * 1000,
         path: "/",
@@ -83,6 +83,7 @@ export default handler = async (req, res) => {
 
     return res.status(200).json({
       message: `Welcome, ${targetUser.firstName} ${targetUser.lastName}!`,
+      email: targetUser.email,
       accessToken,
     });
   } catch (error) {
@@ -91,4 +92,4 @@ export default handler = async (req, res) => {
       error,
     });
   }
-};
+}
