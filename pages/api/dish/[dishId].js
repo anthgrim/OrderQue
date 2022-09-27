@@ -78,7 +78,7 @@ const handler = async (req, res) => {
 
         break;
 
-      case "PUT":
+      case "DELETE":
         // Delete dish in db
         await targetDish.delete();
 
