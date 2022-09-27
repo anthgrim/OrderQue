@@ -74,7 +74,7 @@ export default async function handler(req, res) {
       "Set-Cookie",
       cookie.serialize("jwt", refreshToken, {
         httpOnly: true,
-        //secure: true,
+        secure: true,
         sameSite: "strict",
         maxAge: 24 * 60 * 60 * 1000,
         path: "/",
