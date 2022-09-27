@@ -11,7 +11,7 @@ const Meta = ({ title, keywords, description }) => {
   );
 };
 
-Meta.defaultPropr = {
+Meta.defaultProps = {
   title: "OrderQue.com",
   keywords: "restaurant, order, web application, NextJs App, customer order",
   description: "OrderQue, where small restaurants grow, and generate community",
