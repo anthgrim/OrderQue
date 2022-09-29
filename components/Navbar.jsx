@@ -26,6 +26,16 @@ const Navbar = () => {
         <div className={styles.navbar_menus}>
           <ul className={styles.menus_list}>
             <li className={styles.navbar_menu}>
+              <Link href="/">
+                <a>Home</a>
+              </Link>
+            </li>
+            <li className={styles.navbar_menu}>
+              <Link href="/about">
+                <a>About</a>
+              </Link>
+            </li>
+            <li className={styles.navbar_menu}>
               <Link href="/signUp">
                 <a>Sign Up</a>
               </Link>
@@ -65,6 +75,12 @@ const Navbar = () => {
       {isMobileMenuOpen ? (
         <>
           <div className={styles.navbar_menus_mobile_list}>
+            <div className={styles.navbar_menu_mobile}>
+              <Link href="/">Home</Link>
+            </div>
+            <div className={styles.navbar_menu_mobile}>
+              <Link href="/about">About</Link>
+            </div>
             <div className={styles.navbar_menu_mobile}>
               <Link href="/signUp">Sign Up</Link>
             </div>
