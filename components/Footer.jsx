@@ -1,4 +1,3 @@
-import Link from "next/link";
 import { AiOutlineGithub, AiFillLinkedin, AiFillCode } from "react-icons/ai";
 import styles from "../styles/Footer.module.css";
 
