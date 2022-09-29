@@ -1,10 +1,10 @@
 import Link from "next/link";
 import styles from "../styles/SignIn.module.css";
 
-const signIn = () => {
+const signUp = () => {
   return (
     <>
-      <h2 className={styles.page_title}>Sign In!</h2>
+      <h2 className={styles.page_title}>Sign Up!</h2>
       <div className={styles.page_container}>
         <section className={styles.page_section}>
           <article>
@@ -15,15 +15,15 @@ const signIn = () => {
               Start ordering from your favorite locals! Help the small
               businesses to grow.
             </p>
-            <Link href="/user/signIn">
+            <Link href="/user/signUp">
               <button className={styles.page_section_button}>
-                Sign In as a Customer
+                Sign Up as a Customer
               </button>
             </Link>
             <p>
-              Don't have an account yet?{" "}
-              <Link href="/user/signUp">
-                <span className={styles.page_redirection}>Sign Up here</span>
+              Already have an account?{" "}
+              <Link href="/user/signIn">
+                <span className={styles.page_redirection}>Sign In here</span>
               </Link>
             </p>
           </article>
@@ -37,15 +37,15 @@ const signIn = () => {
               Start selling your dishes and customize your products in one
               single platform!
             </p>
-            <Link href="/restaurant/signIn">
+            <Link href="/restaurant/signUp">
               <button className={styles.page_section_button}>
-                Sign In as a Restaurant
+                Sign Up as a Restaurant
               </button>
             </Link>
             <p>
-              Don't have an account yet?{" "}
-              <Link href="/restaurant/signUp">
-                <span className={styles.page_redirection}>Sign Up here</span>
+              Already have an account?{" "}
+              <Link href="/restaurant/signIn">
+                <span className={styles.page_redirection}>Sign In here</span>
               </Link>
             </p>
           </article>
@@ -55,4 +55,4 @@ const signIn = () => {
   );
 };
 
-export default signIn;
+export default signUp;

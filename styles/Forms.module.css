@@ -1,0 +1,141 @@
+.form_upper_container {
+  height: 100vh;
+}
+
+.form_signIn_image {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+    url("../public/signInImage.jpg");
+  height: 100%;
+  background-position: bottom;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+}
+
+.form_user_signup_image {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+    url("../public/userSignUpImage.jpg");
+  height: 100vh;
+  background-position: bottom;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+}
+
+.form_restaurant_signin_image {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+    url("../public/restaurantSignIn.jpg");
+  height: 100%;
+  background-position: bottom;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+}
+
+.form_restaurant_signup_image {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+    url("../public/restaurantSignUpImage.jpg");
+  height: 100%;
+  background-position: bottom;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+}
+
+.form_container {
+  margin: 1.5rem;
+  padding: 5px 130px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.form_title_container {
+  text-align: center;
+  padding: 1.5rem;
+}
+
+.form_title {
+  color: white;
+  font-size: 3rem;
+  font-weight: 700;
+}
+
+.form {
+  padding: 2rem;
+  gap: 2.5rem;
+  display: flex;
+  border-radius: 5px;
+  flex-direction: column;
+  background-color: white;
+}
+
+.form_row {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.form_row_md {
+  display: flex;
+  justify-content: space-between;
+  gap: 1.5rem;
+}
+
+.form_input {
+  padding: 10px;
+  outline: none;
+  border: 1px solid var(--color-secondary);
+  border-radius: 5px;
+  font-size: 1.15rem;
+  color: var(--color-secondary);
+}
+
+.form_input:focus {
+  border: 1px solid var(--color-hightlight);
+}
+
+.form_hightlight {
+  color: var(--color-hightlight);
+  cursor: pointer;
+}
+
+.form_button {
+  cursor: pointer;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  background-color: var(--color-primary);
+  color: white;
+  font-size: 1.1rem;
+  width: 100%;
+  transition: 0.3s ease-in-out;
+}
+
+.form_button:hover {
+  background-color: var(--color-secondary);
+  transform: translateY(-5px);
+}
+
+@media screen and (max-width: 820px) {
+  .form_container {
+    margin: 1rem;
+    padding: 5px 30px;
+  }
+
+  .form_upper_container {
+    margin-bottom: 70px;
+  }
+
+  .form_user_signup_image {
+    height: auto;
+  }
+
+  .form_restaurant_signup_image {
+    height: auto;
+  }
+
+  .form_row_md {
+    flex-direction: column;
+  }
+}
