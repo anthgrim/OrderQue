@@ -1,9 +1,13 @@
 import { useState } from "react";
+import Router from "next/router";
 import Link from "next/link";
 import axios from "axios";
+import useAuth from "../../hooks/useAuth";
+import { toast } from "react-toastify";
 import styles from "../../styles/Forms.module.css";
 
 const signInUser = () => {
+  const { setAuth, setCurrentUser, setPersist } = useAuth();
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -24,10 +28,14 @@ const signInUser = () => {
         password: formData.password,
       });
 
-      console.log(res.data);
+      setAuth({ accessToken: res.data.accessToken });
+      setCurrentUser(res.data.email);
+      setPersist(true);
+      Router.push({ pathname: "/user/home/", query: { id: res.data.id } });
+      return toast.success(res.data.message);
     } catch (error) {
       console.log(error);
-      alert(error.response.data.message);
+      return toast.error(error.response.data.message);
     }
   };
 

@@ -84,6 +84,7 @@ export default async function handler(req, res) {
     return res.status(200).json({
       message: `Welcome, ${targetUser.firstName} ${targetUser.lastName}!`,
       email: targetUser.email,
+      id: targetUser.id,
       accessToken,
     });
   } catch (error) {
