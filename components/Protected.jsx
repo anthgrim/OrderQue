@@ -1,12 +1,24 @@
-import useAuth from "../hooks/useAuth";
 import { useRouter } from "next/router";
+import axios from "axios";
 
 const isBrowser = () => typeof window !== "undefined";
 
 const Protected = ({ children }) => {
   const router = useRouter();
-  const { currentUser } = useAuth();
-  console.log(router.pathname);
+  let token;
+  let isValid;
+
+  const validateToken = async (token) => {
+    const res = await axios.get("/api/verifyToken", { token });
+    return res.data.isValid;
+  };
+
+  if (typeof window !== "undefined") {
+    // Perform localStorage action
+    token = localStorage.getItem("jwt");
+    isValid = validateToken(token);
+    console.log(isValid);
+  }
 
   let unprotectedRoutes = [
     "/",
@@ -20,8 +32,8 @@ const Protected = ({ children }) => {
 
   let pathIsProtected = unprotectedRoutes.indexOf(router.pathname) === -1;
 
-  if (isBrowser && !currentUser && pathIsProtected) {
-    router.push({ pathname: "/" });
+  if (isBrowser && token === "" && pathIsProtected) {
+    router.push({ pathname: "/signIn" });
   }
 
   return children;

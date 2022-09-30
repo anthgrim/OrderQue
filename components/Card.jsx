@@ -3,7 +3,7 @@ import styles from "../styles/Card.module.css";
 const Card = ({ restaurantData }) => {
   return (
     <div className={styles.card}>
-      <img src={restaurantData.image} alt="restaurant image" />
+      {/* <img src={restaurantData.image} alt="restaurant image" /> */}
       <div className={styles.card_content}>
         <h2>{restaurantData.name}</h2>
         <p>{restaurantData.description}</p>
