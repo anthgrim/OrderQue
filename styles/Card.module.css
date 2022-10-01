@@ -1,5 +1,5 @@
 .card {
-  margin: 1rem;
+  margin: 1rem 0;
   padding: 1.5rem;
   text-align: left;
   color: inherit;
@@ -54,10 +54,6 @@
   background-color: var(--color-primary);
   transition: 0.3s ease-in-out;
 }
-
-/* .card_button:hover {
-  transform: translateY(-5px);
-} */
 
 @media (max-width: 1280px) {
   .card {
