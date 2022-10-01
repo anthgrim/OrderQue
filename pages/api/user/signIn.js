@@ -72,7 +72,7 @@ export default async function handler(req, res) {
     // Set cookie
     res.setHeader(
       "Set-Cookie",
-      cookie.serialize("jwt", refreshToken, {
+      cookie.serialize("token", refreshToken, {
         httpOnly: true,
         secure: true,
         sameSite: "strict",
@@ -85,6 +85,7 @@ export default async function handler(req, res) {
       message: `Welcome, ${targetUser.firstName} ${targetUser.lastName}!`,
       email: targetUser.email,
       id: targetUser.id,
+      refreshToken,
       accessToken,
     });
   } catch (error) {

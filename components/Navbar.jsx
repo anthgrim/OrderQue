@@ -1,14 +1,35 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import axios from "axios";
+import useAuth from "../hooks/useAuth";
 import Link from "next/link";
 import Image from "next/image";
 import styles from "../styles/Navbar.module.css";
+import { toast } from "react-toastify";
 
 const Navbar = () => {
+  const { setAuth, currentUser, setCurrentUser } = useAuth();
+  const [user, setUser] = useState("");
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+  useEffect(() => {
+    setUser(currentUser);
+  }, [currentUser]);
 
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen((prev) => !prev);
   };
+
+  const signOutAction = async () => {
+    await axios.post("/api/user/signOut");
+    if (typeof window !== "undefined") {
+      localStorage.removeItem("accessToken");
+      localStorage.removeItem("currentUser");
+    }
+    setAuth({});
+    setCurrentUser("");
+    return toast.success("See you next time!");
+  };
+
   return (
     <>
       <nav className={styles.navbar}>
@@ -35,16 +56,28 @@ const Navbar = () => {
                 <a>About</a>
               </Link>
             </li>
-            <li className={styles.navbar_menu}>
-              <Link href="/signUp">
-                <a>Sign Up</a>
-              </Link>
-            </li>
-            <li className={styles.navbar_menu}>
-              <Link href="/signIn">
-                <a>Sign In</a>
-              </Link>
-            </li>
+            {user === "" ? (
+              <>
+                <li className={styles.navbar_menu}>
+                  <Link href="/signUp">
+                    <a>Sign Up</a>
+                  </Link>
+                </li>
+                <li className={styles.navbar_menu}>
+                  <Link href="/signIn">
+                    <a>Sign In</a>
+                  </Link>
+                </li>
+              </>
+            ) : (
+              <>
+                <li className={styles.navbar_menu} onClick={signOutAction}>
+                  <Link href="/">
+                    <a>Sign Out</a>
+                  </Link>
+                </li>
+              </>
+            )}
           </ul>
         </div>
         <div className={styles.navbar_menus_mobile} onClick={toggleMobileMenu}>

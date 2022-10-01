@@ -32,8 +32,8 @@ const signInUser = () => {
       setCurrentUser(res.data.email);
       setPersist(true);
       localStorage.setItem("currentUser", res.data.email);
-      localStorage.setItem("jwt", res.data.accessToken);
-      Router.push({ pathname: "/user/home/", query: { id: res.data.id } });
+      localStorage.setItem("accessToken", res.data.accessToken);
+      Router.push({ pathname: "/", query: { id: res.data.id } });
       return toast.success(res.data.message);
     } catch (error) {
       console.log(error);

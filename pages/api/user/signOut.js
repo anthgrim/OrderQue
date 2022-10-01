@@ -20,8 +20,9 @@ export default async function handler(req, res) {
 
   // Verify cookies
   const cookies = req.cookies;
+  const jwt = cookies.token;
 
-  if (!cookie?.jwt) {
+  if (!jwt) {
     return res.status(204).end();
   }
 
@@ -30,12 +31,13 @@ export default async function handler(req, res) {
     await connectDb();
 
     // Get target User
-    const targetUSer = await User.findOne({ refreshToken: cookies.jwt }).exec();
+    const targetUSer = await User.findOne({ refreshToken: jwt }).exec();
 
     if (!targetUSer) {
+      console.log("No User");
       res.setHeader(
         "Set-Cookie",
-        cookie.serialize("jwt", "", {
+        cookie.serialize("token", "", {
           httpOnly: true,
           secure: true,
           sameSite: "strict",
@@ -53,7 +55,7 @@ export default async function handler(req, res) {
     // Remove cookie in client
     res.setHeader(
       "Set-Cookie",
-      cookie.serialize("jwt", "", {
+      cookie.serialize("token", "", {
         httpOnly: true,
         secure: true,
         sameSite: "strict",
