@@ -1,5 +1,6 @@
 import useAuth from "../hooks/useAuth";
 import { useRouter } from "next/router";
+import Router from "next/router";
 import { toast } from "react-toastify";
 import styles from "../styles/Card.module.css";
 
@@ -13,7 +14,10 @@ const Card = ({ restaurantData }) => {
       return toast.info("Please sign in to your account to start an order");
     }
 
-    return toast.success("Ordering");
+    Router.push({
+      pathname: "/user/restaurantOrder",
+      query: { restaurantId: restaurantData._id },
+    });
   };
 
   return (

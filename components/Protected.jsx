@@ -1,4 +1,5 @@
 import { useRouter } from "next/router";
+import Router from "next/router";
 
 const isBrowser = () => typeof window !== "undefined";
 
@@ -24,7 +25,7 @@ const Protected = ({ children }) => {
   let pathIsProtected = unprotectedRoutes.indexOf(router.pathname) === -1;
 
   if (isBrowser && !token && pathIsProtected) {
-    router.push({ pathname: "/signIn" });
+    Router.push({ pathname: "/signIn" });
   }
 
   return children;
