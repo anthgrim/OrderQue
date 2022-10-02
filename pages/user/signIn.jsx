@@ -6,7 +6,7 @@ import useAuth from "../../hooks/useAuth";
 import { toast } from "react-toastify";
 import styles from "../../styles/Forms.module.css";
 
-const signInUser = () => {
+const SignInUser = () => {
   const { setAuth, setCurrentUser, setPersist } = useAuth();
   const [formData, setFormData] = useState({
     email: "",
@@ -100,4 +100,4 @@ const signInUser = () => {
   );
 };
 
-export default signInUser;
+export default SignInUser;

@@ -3,7 +3,7 @@ import Link from "next/link";
 import axios from "axios";
 import styles from "../../styles/Forms.module.css";
 
-const signInUser = () => {
+const SignUp = () => {
   const [formData, setFormData] = useState({
     name: "",
     description: "",
@@ -141,4 +141,4 @@ const signInUser = () => {
   );
 };
 
-export default signInUser;
+export default SignUp;

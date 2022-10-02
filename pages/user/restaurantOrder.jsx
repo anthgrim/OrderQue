@@ -1,7 +1,7 @@
 import CardDish from "../../components/CardDish";
 import styles from "../../styles/Home.module.css";
 
-const restaurantOrder = ({ restaurant, dishes }) => {
+const RestaurantOrder = ({ restaurant, dishes }) => {
   console.log(restaurant);
   console.log(dishes);
 
@@ -44,7 +44,7 @@ const restaurantOrder = ({ restaurant, dishes }) => {
   );
 };
 
-export default restaurantOrder;
+export default RestaurantOrder;
 
 export async function getServerSideProps(context) {
   const { restaurantId } = context.query;

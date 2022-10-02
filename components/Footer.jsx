@@ -23,7 +23,11 @@ const Footer = () => {
       <div className={styles.footer_section}>
         <h4>Contact</h4>
         <div>
-          <a href="https://github.com/anthgrim" target="_blank">
+          <a
+            href="https://github.com/anthgrim"
+            target="_blank"
+            rel="noreferrer"
+          >
             <div className={styles.footer_contact_item}>
               <div className={styles.footer_contact_item_icon}>
                 <AiOutlineGithub />
@@ -34,6 +38,7 @@ const Footer = () => {
           <a
             href="https://www.linkedin.com/in/kevin-grimaldi-392b44178/"
             target="_blank"
+            rel="noreferrer"
           >
             <div className={styles.footer_contact_item}>
               <div className={styles.footer_contact_item_icon}>
@@ -42,7 +47,11 @@ const Footer = () => {
               <div>Kevin Grimaldi</div>
             </div>
           </a>
-          <a href="https://github.com/anthgrim/OrderQue" target="_blank">
+          <a
+            href="https://github.com/anthgrim/OrderQue"
+            target="_blank"
+            rel="noreferrer"
+          >
             <div className={styles.footer_contact_item}>
               <div className={styles.footer_contact_item_icon}>
                 <AiFillCode />

@@ -1,7 +1,7 @@
 import Link from "next/link";
 import styles from "../styles/SignIn.module.css";
 
-const signUp = () => {
+const SignUp = () => {
   return (
     <>
       <h2 className={styles.page_title}>Sign Up!</h2>
@@ -55,4 +55,4 @@ const signUp = () => {
   );
 };
 
-export default signUp;
+export default SignUp;
