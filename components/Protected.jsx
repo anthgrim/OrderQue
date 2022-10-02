@@ -5,11 +5,8 @@ const isBrowser = () => typeof window !== "undefined";
 
 const Protected = ({ children }) => {
   const router = useRouter();
+  let pathIsProtected = false;
   let token;
-
-  if (typeof window !== "undefined") {
-    token = localStorage.getItem("accessToken");
-  }
 
   let unprotectedRoutes = [
     "/",
@@ -22,21 +19,16 @@ const Protected = ({ children }) => {
     "/restaurant/signUp",
   ];
 
-  let pathIsProtected = unprotectedRoutes.indexOf(router.pathname) === -1;
+  if (typeof window !== "undefined") {
+    pathIsProtected = unprotectedRoutes.indexOf(router.pathname) === -1;
+    token = localStorage.getItem("accessToken");
+  }
 
   if (isBrowser && !token && pathIsProtected) {
     Router.push({ pathname: "/signIn" });
+  } else {
+    return children;
   }
-
-  return children;
 };
 
 export default Protected;
-
-export async function getServerSideProps() {
-  return {
-    props: {
-      data: "rendering",
-    },
-  };
-}
