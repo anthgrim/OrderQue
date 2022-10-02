@@ -114,12 +114,23 @@ const Navbar = () => {
             <div className={styles.navbar_menu_mobile}>
               <Link href="/about">About</Link>
             </div>
-            <div className={styles.navbar_menu_mobile}>
-              <Link href="/signUp">Sign Up</Link>
-            </div>
-            <div className={styles.navbar_menu_mobile}>
-              <Link href="/signIn">Sign In</Link>
-            </div>
+            {user === "" ? (
+              <>
+                <div className={styles.navbar_menu_mobile}>
+                  <Link href="/signUp">Sign Up</Link>
+                </div>
+                <div className={styles.navbar_menu_mobile}>
+                  <Link href="/signIn">Sign In</Link>
+                </div>
+              </>
+            ) : (
+              <div
+                className={styles.navbar_menu_mobile}
+                onClick={signOutAction}
+              >
+                <Link href="/">Sign Out</Link>
+              </div>
+            )}
           </div>
         </>
       ) : (
