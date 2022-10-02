@@ -63,10 +63,13 @@ export default function Home({ restaurants }) {
 }
 
 export async function getServerSideProps() {
-  const response = await fetch("http:/localhost:3000/api/home/restaurants", {
-    method: "GET",
-    headers: { "Content-Type": "application/json" },
-  });
+  const response = await fetch(
+    "https://order-f7g1zeyae-anthgrim.vercel.app/api/home/restaurants",
+    {
+      method: "GET",
+      headers: { "Content-Type": "application/json" },
+    }
+  );
 
   const data = await response.json();
   const restaurants = data.restaurants;

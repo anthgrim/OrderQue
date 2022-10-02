@@ -49,7 +49,7 @@ export default RestaurantOrder;
 export async function getServerSideProps(context) {
   const { restaurantId } = context.query;
   const response = await fetch(
-    `http://localhost:3000/api/home/restaurant?restaurantId=${restaurantId}`,
+    `https://order-f7g1zeyae-anthgrim.vercel.app/api/home/restaurant?restaurantId=${restaurantId}`,
     {
       method: "GET",
       headers: { "Content-Type": "application/json" },
