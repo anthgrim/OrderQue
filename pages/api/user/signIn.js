@@ -81,8 +81,11 @@ export default async function handler(req, res) {
       })
     );
 
+    const user = `${targetUser.firstName} ${targetUser.lastName}`;
+
     return res.status(200).json({
-      message: `Welcome, ${targetUser.firstName} ${targetUser.lastName}!`,
+      message: `Welcome, ${user}!`,
+      user,
       email: targetUser.email,
       id: targetUser.id,
       refreshToken,

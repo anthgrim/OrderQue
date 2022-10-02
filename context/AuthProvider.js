@@ -1,11 +1,15 @@
-import { createContext, useState } from "react";
+import { createContext, useState, useEffect } from "react";
 
 const AuthContext = createContext({});
 
 export const AuthProvider = ({ children }) => {
-  const [auth, setAuth] = useState({});
   const [currentUser, setCurrentUser] = useState("");
-  const [persist, setPersist] = useState(false);
+  const [auth, setAuth] = useState({});
+
+  useEffect(() => {
+    setCurrentUser(localStorage.getItem("currentUser") || "");
+    setAuth(localStorage.getItem("accessToken") || {});
+  }, []);
 
   return (
     <AuthContext.Provider
@@ -14,8 +18,6 @@ export const AuthProvider = ({ children }) => {
         setAuth,
         currentUser,
         setCurrentUser,
-        persist,
-        setPersist,
       }}
     >
       {children}

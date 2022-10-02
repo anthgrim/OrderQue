@@ -7,7 +7,7 @@ import { toast } from "react-toastify";
 import styles from "../../styles/Forms.module.css";
 
 const SignInUser = () => {
-  const { setAuth, setCurrentUser, setPersist } = useAuth();
+  const { setAuth, setCurrentUser } = useAuth();
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -29,9 +29,8 @@ const SignInUser = () => {
       });
 
       setAuth({ accessToken: res.data.accessToken });
-      setCurrentUser(res.data.email);
-      setPersist(true);
-      localStorage.setItem("currentUser", res.data.email);
+      setCurrentUser(res.data.user);
+      localStorage.setItem("currentUser", res.data.user);
       localStorage.setItem("accessToken", res.data.accessToken);
       Router.push({ pathname: "/", query: { id: res.data.id } });
       return toast.success(res.data.message);

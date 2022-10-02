@@ -2,9 +2,6 @@ import CardDish from "../../components/CardDish";
 import styles from "../../styles/Home.module.css";
 
 const RestaurantOrder = ({ restaurant, dishes }) => {
-  console.log(restaurant);
-  console.log(dishes);
-
   const tempData = [
     {
       name: "Delicious but Suspicious",
@@ -48,8 +45,12 @@ export default RestaurantOrder;
 
 export async function getServerSideProps(context) {
   const { restaurantId } = context.query;
+  const api =
+    process.env.NODE_ENV === "development"
+      ? "http://localhost:3000"
+      : "https://order-f7g1zeyae-anthgrim.vercel.app";
   const response = await fetch(
-    `https://order-f7g1zeyae-anthgrim.vercel.app/api/home/restaurant?restaurantId=${restaurantId}`,
+    `${api}/api/home/restaurant?restaurantId=${restaurantId}`,
     {
       method: "GET",
       headers: { "Content-Type": "application/json" },

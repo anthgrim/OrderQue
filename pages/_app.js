@@ -1,6 +1,6 @@
+import { AuthProvider } from "../context/AuthProvider";
 import Layout from "../components/Layout";
 import Protected from "../components/Protected";
-import { AuthProvider } from "../context/AuthProvider";
 import { ToastContainer } from "react-toastify";
 import "../styles/globals.css";
 import "react-toastify/dist/ReactToastify.css";
