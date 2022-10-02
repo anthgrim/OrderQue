@@ -32,3 +32,11 @@ const Protected = ({ children }) => {
 };
 
 export default Protected;
+
+export async function getServerSideProps() {
+  return {
+    props: {
+      data: "rendering",
+    },
+  };
+}
