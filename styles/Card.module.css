@@ -17,6 +17,23 @@
   gap: 10px;
 }
 
+.card_actions {
+  display: flex;
+  justify-content: space-between;
+}
+
+.card_action_button {
+  cursor: pointer;
+  padding: 5px;
+  font-size: 1.05rem;
+  width: 15%;
+  background-color: var(--color-primary);
+  color: white;
+  border: none;
+  border-radius: 5px;
+  transition: 0.3s ease-in-out;
+}
+
 .card:hover {
   background-color: var(--color-primary);
   color: white;
@@ -27,7 +44,18 @@
   color: var(--color-primary);
 }
 
+.card:hover .card_action_button {
+  background-color: white;
+  color: var(--color-primary);
+}
+
 .card:hover .card_button:hover {
+  transform: translateY(-5px);
+  background-color: var(--color-hightlight);
+  color: white;
+}
+
+.card:hover .card_action_button:hover {
   transform: translateY(-5px);
   background-color: var(--color-hightlight);
   color: white;
