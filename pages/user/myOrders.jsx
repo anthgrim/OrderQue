@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import useAxiosPrivate from "../../hooks/useAxiosPrivate";
 
-const myOrders = () => {
+const MyOrders = () => {
   const [orders, setOrders] = useState([]);
   const axiosPrivate = useAxiosPrivate();
 
@@ -29,4 +29,4 @@ const myOrders = () => {
   );
 };
 
-export default myOrders;
+export default MyOrders;
