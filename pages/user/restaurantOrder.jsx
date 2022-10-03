@@ -60,7 +60,7 @@ export async function getServerSideProps(context) {
   const api =
     process.env.NODE_ENV === "development"
       ? "http://localhost:3000"
-      : "https://order-f7g1zeyae-anthgrim.vercel.app";
+      : "https://order-que.vercel.app";
   const response = await fetch(
     `${api}/api/home/restaurant?restaurantId=${restaurantId}`,
     {
