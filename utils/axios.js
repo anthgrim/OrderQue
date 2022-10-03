@@ -3,7 +3,7 @@ import axios from "axios";
 const BASE_URL =
   process.env.NODE_ENV === "development"
     ? "http://localhost:3000"
-    : "https://order-que.vercel.app";
+    : "https://www.orderque.com";
 
 export default axios.create({
   baseURL: BASE_URL,
