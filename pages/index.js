@@ -21,7 +21,7 @@ export default function Home({ restaurants }) {
 
   const onSearch = (target) => {
     if (target === "" || !target) {
-      return toast.info("Please type a restaurant");
+      return toast.info("Please type or select a restaurant");
     }
 
     const restaurant = restaurants.filter((res) => res.name === target);
@@ -50,6 +50,7 @@ export default function Home({ restaurants }) {
                 onSearch={onSearch}
                 onClear={onClearSearch}
                 list={restaurants}
+                placeholder="Restaurants..."
               />
             ) : (
               <></>

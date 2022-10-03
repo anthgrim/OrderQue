@@ -4,6 +4,7 @@ import useAuth from "../hooks/useAuth";
 import Link from "next/link";
 import Image from "next/image";
 import styles from "../styles/Navbar.module.css";
+import { IoExitOutline } from "react-icons/io5";
 import { toast } from "react-toastify";
 
 const Navbar = () => {
@@ -71,9 +72,19 @@ const Navbar = () => {
               </>
             ) : (
               <>
+                <li className={styles.navbar_menu}>
+                  <Link href="/user/myOrders">
+                    <a>My Orders</a>
+                  </Link>
+                </li>
+                <li className={styles.navbar_menu}>
+                  <a>{user}</a>
+                </li>
                 <li className={styles.navbar_menu} onClick={signOutAction}>
                   <Link href="/">
-                    <a>Sign Out</a>
+                    <a title="Sign Out">
+                      <IoExitOutline />
+                    </a>
                   </Link>
                 </li>
               </>
@@ -124,12 +135,18 @@ const Navbar = () => {
                 </div>
               </>
             ) : (
-              <div
-                className={styles.navbar_menu_mobile}
-                onClick={signOutAction}
-              >
-                <Link href="/">Sign Out</Link>
-              </div>
+              <>
+                <div className={styles.navbar_menu_mobile}>
+                  <Link href="/user/myOrders">My Orders</Link>
+                </div>
+                <div className={styles.navbar_menu_mobile}>{user}</div>
+                <div
+                  className={styles.navbar_menu_mobile}
+                  onClick={signOutAction}
+                >
+                  <Link href="/">Sign Out</Link>
+                </div>
+              </>
             )}
           </div>
         </>

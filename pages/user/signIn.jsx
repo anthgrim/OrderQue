@@ -31,7 +31,7 @@ const SignInUser = () => {
       setAuth({ accessToken: res.data.accessToken });
       setCurrentUser(res.data.user);
       localStorage.setItem("currentUser", res.data.user);
-      localStorage.setItem("accessToken", res.data.accessToken);
+      localStorage.setItem("accountType", "User");
       Router.push({ pathname: "/", query: { id: res.data.id } });
       return toast.success(res.data.message);
     } catch (error) {

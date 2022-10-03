@@ -21,7 +21,7 @@ export default async function handler(req, res) {
   // Verify cookies
   const cookies = req.cookies;
 
-  if (!cookies?.jwt) {
+  if (!cookies?.token) {
     return res.status(401).json({
       message: "Not authorized",
     });
@@ -32,7 +32,7 @@ export default async function handler(req, res) {
     await connectDb();
 
     // Get token from cookies
-    const refreshToken = cookies.jwt;
+    const refreshToken = cookies.token;
 
     // Get target user
     const targetUser = await User.findOne({ refreshToken }).exec();

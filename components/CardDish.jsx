@@ -1,4 +1,5 @@
 import { useState } from "react";
+import formatter from "../utils/formatter";
 import styles from "../styles/Card.module.css";
 
 const CardDish = ({ dishData }) => {
@@ -15,8 +16,10 @@ const CardDish = ({ dishData }) => {
       {/* <img src={dishData.image} alt="dish image" /> */}
       <div className={styles.card_content}>
         <h2>{dishData.name}</h2>
-        <p>{dishData.description}</p>
-        <h4>{dishData.price}</h4>
+        <p className={styles.card_description}>{dishData.description}</p>
+        <h4 className={styles.card_price}>
+          {formatter.currency(dishData?.price)}
+        </h4>
         <div className={styles.card_actions}>
           <button className={styles.card_action_button} onClick={decrease}>
             -

@@ -17,6 +17,16 @@
   gap: 10px;
 }
 
+.card_description {
+  text-align: center;
+  color: var(--color-secondary);
+}
+
+.card_price {
+  text-align: center;
+  font-size: 1.2rem;
+}
+
 .card_actions {
   display: flex;
   justify-content: space-between;
@@ -36,6 +46,10 @@
 
 .card:hover {
   background-color: var(--color-primary);
+  color: white;
+}
+
+.card:hover .card_description {
   color: white;
 }
 

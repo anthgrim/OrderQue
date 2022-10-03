@@ -1,7 +1,7 @@
 import { useState } from "react";
 import styles from "../styles/Forms.module.css";
 
-const SearchBar = ({ onSearch, onClear, list }) => {
+const SearchBar = ({ onSearch, onClear, list, placeholder }) => {
   const [search, setSearch] = useState("");
 
   const handleChange = (e) => {
@@ -20,28 +20,26 @@ const SearchBar = ({ onSearch, onClear, list }) => {
 
   const options =
     list.length > 0 ? (
-      list.map((restaurant, index) => {
-        return (
-          <option key={index} value={restaurant.name} id={restaurant._id} />
-        );
+      list.map((item, index) => {
+        return <option key={index} value={item.name} id={item._id} />;
       })
     ) : (
-      <option value="-- No Restaurants Found --" />
+      <option value="-- Nothing Found --" />
     );
 
   return (
     <div className={styles.form_row_sm}>
       <input
         className={styles.form_input_sm}
-        list="restaurants"
-        placeholder="Restaurant..."
-        name="restaurant"
-        id="restaurant"
+        list="items"
+        placeholder={placeholder}
+        name="item"
+        id="item"
         value={search}
         onChange={(e) => handleChange(e)}
         onSelect={(e) => handleChange(e)}
       />
-      <datalist id="restaurants">{options}</datalist>
+      <datalist id="items">{options}</datalist>
       <div className={styles.form_button_container}>
         <button className={styles.form_button_sm} onClick={handleSearch}>
           Search

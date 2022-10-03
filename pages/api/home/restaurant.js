@@ -44,6 +44,7 @@ export default async function handler(req, res) {
 
     // Prepare restaurant response
     const restaurant = {
+      id: restaurantId,
       name: targetRestaurant.name,
       description: targetRestaurant.description,
     };

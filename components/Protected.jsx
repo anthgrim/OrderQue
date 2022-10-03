@@ -6,7 +6,7 @@ const isBrowser = () => typeof window !== "undefined";
 const Protected = ({ children }) => {
   const router = useRouter();
   let pathIsProtected = false;
-  let token;
+  let currentUser;
 
   let unprotectedRoutes = [
     "/",
@@ -21,10 +21,10 @@ const Protected = ({ children }) => {
 
   if (typeof window !== "undefined") {
     pathIsProtected = unprotectedRoutes.indexOf(router.pathname) === -1;
-    token = localStorage.getItem("accessToken");
+    currentUser = localStorage.getItem("currentUser");
   }
 
-  if (isBrowser && !token && pathIsProtected) {
+  if (isBrowser && !currentUser && pathIsProtected) {
     Router.push({ pathname: "/signIn" });
   } else {
     return children;

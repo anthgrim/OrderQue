@@ -8,7 +8,6 @@ export const AuthProvider = ({ children }) => {
 
   useEffect(() => {
     setCurrentUser(localStorage.getItem("currentUser") || "");
-    setAuth(localStorage.getItem("accessToken") || {});
   }, []);
 
   return (

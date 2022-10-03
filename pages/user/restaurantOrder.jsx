@@ -1,33 +1,35 @@
+import { useState } from "react";
 import CardDish from "../../components/CardDish";
+import SearchBar from "../../components/SearchBar";
+import { toast } from "react-toastify";
 import styles from "../../styles/Home.module.css";
 
 const RestaurantOrder = ({ restaurant, dishes }) => {
-  const tempData = [
-    {
-      name: "Delicious but Suspicious",
-      description: "It's a guess",
-      price: 19.99,
-    },
-    {
-      name: "Thermo Dessert",
-      description: "It's something hot",
-      price: 9.99,
-    },
-    {
-      name: "Bakineer Maxima",
-      description: "A bit strange",
-      price: 39.99,
-    },
-  ];
+  const [search, setSearch] = useState(null);
 
   const dishList =
-    tempData.length === 0 ? (
+    dishes.length === 0 ? (
       <p>No dishes have been added yet</p>
-    ) : (
-      tempData.map((dish, index) => {
+    ) : !search ? (
+      dishes.map((dish, index) => {
         return <CardDish dishData={dish} key={index} />;
       })
+    ) : (
+      <CardDish dishData={search} />
     );
+
+  const onSearch = (target) => {
+    if (target === "" || !target) {
+      return toast.info("Please type or select a dish");
+    }
+
+    const dish = dishes.filter((dis) => dis.name === target);
+    if (dish.length === 0) return toast.info("Dish does not exist");
+
+    setSearch(dish[0]);
+  };
+
+  const onClearSearch = () => setSearch(null);
 
   return (
     <>
@@ -35,6 +37,16 @@ const RestaurantOrder = ({ restaurant, dishes }) => {
         <h1>Welcome to {restaurant.name}!</h1>
         <p>{restaurant.description}</p>
         <h2>Our delicious dishes!</h2>
+        {dishes.length > 0 ? (
+          <SearchBar
+            onSearch={onSearch}
+            onClear={onClearSearch}
+            list={dishes}
+            placeholder="Dishes..."
+          />
+        ) : (
+          <></>
+        )}
         <div className={styles.list}>{dishList}</div>
       </div>
     </>
