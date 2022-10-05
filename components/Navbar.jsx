@@ -4,11 +4,13 @@ import useAuth from "../hooks/useAuth";
 import Link from "next/link";
 import Image from "next/image";
 import styles from "../styles/Navbar.module.css";
-import { IoExitOutline } from "react-icons/io5";
+import { AiOutlineShoppingCart } from "react-icons/ai";
 import { toast } from "react-toastify";
+import useData from "../hooks/useData";
 
 const Navbar = () => {
   const { setAuth, currentUser, setCurrentUser } = useAuth();
+  const { cart, setCart } = useData();
   const [user, setUser] = useState("");
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
@@ -20,6 +22,11 @@ const Navbar = () => {
     setIsMobileMenuOpen((prev) => !prev);
   };
 
+  const totalCartQuantity =
+    cart.length === 0
+      ? 0
+      : cart.reduce((prev, curr) => prev + curr.quantity, 0);
+
   const signOutAction = async () => {
     await axios.post("/api/user/signOut");
     if (typeof window !== "undefined") {
@@ -28,6 +35,7 @@ const Navbar = () => {
     }
     setAuth({});
     setCurrentUser("");
+    setCart([]);
     return toast.success("See you next time!");
   };
 
@@ -77,43 +85,75 @@ const Navbar = () => {
                     <a>My Orders</a>
                   </Link>
                 </li>
+
                 <li className={styles.navbar_menu}>
                   <a>{user}</a>
                 </li>
+                <li className={styles.navbar_menu}>
+                  <Link href="/user/myCart">
+                    <div className={styles.cart_container}>
+                      <span title="Cart">
+                        <AiOutlineShoppingCart className={styles.navbar_icon} />
+                      </span>
+                      <span className={styles.cart_quantity}>
+                        {totalCartQuantity}
+                      </span>
+                    </div>
+                  </Link>
+                </li>
                 <li className={styles.navbar_menu} onClick={signOutAction}>
                   <Link href="/">
-                    <a title="Sign Out">
-                      <IoExitOutline />
-                    </a>
+                    <a title="Sign Out">Sign Out</a>
                   </Link>
                 </li>
               </>
             )}
           </ul>
         </div>
-        <div className={styles.navbar_menus_mobile} onClick={toggleMobileMenu}>
-          {isMobileMenuOpen ? (
-            <>
-              <div className={styles.line_close_one}>
-                <span></span>
-              </div>
-              <div className={styles.line_close_two}>
-                <span></span>
-              </div>
-            </>
+        <div className={styles.mobile_navbar_container}>
+          {user === "" ? (
+            <></>
           ) : (
-            <>
-              <div className={styles.line}>
-                <span></span>
-              </div>
-              <div className={styles.line}>
-                <span></span>
-              </div>
-              <div className={styles.line}>
-                <span></span>
-              </div>
-            </>
+            <div className={styles.navbar_menu_cart}>
+              <Link href="/user/myCart">
+                <div className={styles.cart_container}>
+                  <span title="Cart">
+                    <AiOutlineShoppingCart className={styles.navbar_icon} />
+                  </span>
+                  <span className={styles.cart_quantity}>
+                    {totalCartQuantity}
+                  </span>
+                </div>
+              </Link>
+            </div>
           )}
+          <div
+            className={styles.navbar_menus_mobile}
+            onClick={toggleMobileMenu}
+          >
+            {isMobileMenuOpen ? (
+              <>
+                <div className={styles.line_close_one}>
+                  <span></span>
+                </div>
+                <div className={styles.line_close_two}>
+                  <span></span>
+                </div>
+              </>
+            ) : (
+              <>
+                <div className={styles.line}>
+                  <span></span>
+                </div>
+                <div className={styles.line}>
+                  <span></span>
+                </div>
+                <div className={styles.line}>
+                  <span></span>
+                </div>
+              </>
+            )}
+          </div>
         </div>
       </nav>
       {isMobileMenuOpen ? (

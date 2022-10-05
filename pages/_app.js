@@ -1,4 +1,5 @@
 import { AuthProvider } from "../context/AuthProvider";
+import { DataProvider } from "../context/DataProvider";
 import Layout from "../components/Layout";
 import Protected from "../components/Protected";
 import { ToastContainer } from "react-toastify";
@@ -10,9 +11,11 @@ function MyApp({ Component, pageProps }) {
     <>
       <AuthProvider>
         <Protected>
-          <Layout>
-            <Component {...pageProps} />
-          </Layout>
+          <DataProvider>
+            <Layout>
+              <Component {...pageProps} />
+            </Layout>
+          </DataProvider>
         </Protected>
       </AuthProvider>
       <ToastContainer theme="dark" />

@@ -1,14 +1,39 @@
 import { useState } from "react";
 import formatter from "../utils/formatter";
 import styles from "../styles/Card.module.css";
+import useData from "../hooks/useData";
+import { toast } from "react-toastify";
 
 const CardDish = ({ dishData }) => {
   const [quantity, setQuantity] = useState(0);
+  const { addItem } = useData();
 
   const increase = () => setQuantity((prev) => prev + 1);
+
   const decrease = () => {
     if (quantity === 0) return;
     setQuantity((prev) => prev - 1);
+  };
+
+  const onAdd = () => {
+    if (quantity === 0) {
+      return toast.info("Please add at least one item to the cart");
+    }
+
+    // Build new item data
+    const newItem = {
+      _id: dishData._id,
+      restaurantId: dishData.restaurantId,
+      name: dishData.name,
+      description: dishData.description,
+      price: dishData.price,
+      quantity: quantity,
+      total: quantity * dishData.price,
+    };
+
+    addItem(newItem, quantity);
+    setQuantity(0);
+    toast.success("Item(s) added to the cart");
   };
 
   return (
@@ -29,7 +54,9 @@ const CardDish = ({ dishData }) => {
             +
           </button>
         </div>
-        <button className={styles.card_button}>Add to Order</button>
+        <button className={styles.card_button} onClick={onAdd}>
+          Add to Order
+        </button>
       </div>
     </div>
   );
