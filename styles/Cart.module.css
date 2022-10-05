@@ -68,9 +68,25 @@
   transition: 0.3s ease-in-out;
 }
 
+.cart_item_button_lg {
+  cursor: pointer;
+  padding: 10px;
+  font-size: 1.05rem;
+  border: none;
+  border-radius: 3px;
+  background-color: var(--color-primary);
+  color: white;
+  transition: 0.3s ease-in-out;
+}
+
 .cart_item_button:hover {
   transform: translateY(-5px);
   background-color: var(--color-primary);
+}
+
+.cart_item_button_lg:hover {
+  transform: translateY(-5px);
+  background-color: var(--color-hightlight);
 }
 
 .cart_item_quantity {

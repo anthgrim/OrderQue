@@ -1,22 +1,20 @@
+import { useState } from "react";
 import useData from "../../hooks/useData";
 import formatter from "../../utils/formatter";
-import CartItem from "../../components/CartItem";
+import CartItemsList from "../../components/CartItemsList";
+import CheckOutForm from "../../components/CheckOutForm";
 import styles from "../../styles/Cart.module.css";
 
 const MyCart = () => {
   const { cart } = useData();
-
-  const itemsList =
-    cart.length === 0 ? (
-      <p>No items added yet</p>
-    ) : (
-      cart.map((item, index) => {
-        return <CartItem itemData={item} key={index} />;
-      })
-    );
+  const [isCheckOut, setIsCheckOut] = useState(false);
 
   const totalCartItem =
     cart.length === 0 ? 0 : cart.reduce((prev, curr) => prev + curr.total, 0);
+
+  const toggleCheckOutForm = () => {
+    setIsCheckOut((prev) => !prev);
+  };
 
   return (
     <div className={styles.main}>
@@ -27,24 +25,33 @@ const MyCart = () => {
           {formatter.currency(totalCartItem)}
         </span>
       </div>
-      <div className={styles.cart_items_container}>
-        {cart.length === 0 ? (
-          <></>
-        ) : (
-          <div className={styles.cart_item_header}>
-            <div></div>
-            <div>
-              <span className={styles.cart_item_name_header}>Dish</span>
-            </div>
-            <div className={styles.cart_item_quantity}>Quantity</div>
-            <div className={styles.cart_item_total}>
-              <span>Unit Price</span>
-            </div>
-            <div className={styles.cart_item_total}>Dish Total</div>
-          </div>
-        )}
-        {itemsList}
-      </div>
+      {cart.length > 0 ? (
+        <div>
+          {!isCheckOut ? (
+            <>
+              <button
+                className={styles.cart_item_button_lg}
+                onClick={toggleCheckOutForm}
+              >
+                Place My Order
+              </button>
+              <CartItemsList cart={cart} />
+            </>
+          ) : (
+            <>
+              <button
+                className={styles.cart_item_button_lg}
+                onClick={toggleCheckOutForm}
+              >
+                Edit Cart
+              </button>
+              <CheckOutForm />
+            </>
+          )}
+        </div>
+      ) : (
+        <p>No items added yet</p>
+      )}
     </div>
   );
 };
