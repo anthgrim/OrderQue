@@ -5,12 +5,37 @@ import jwt from "jsonwebtoken";
 import cookie from "cookie";
 
 /**
- * @desc   User sign in endpoint
- * @route  POST /api/user/signIn
- * @method POST
- * @access Public
- * @param {import("next").NextApiRequest} req
- * @param {import("next").NextApiResponse} res
+ * @swagger
+ * paths:
+ *  /api/user/signIn:
+ *    post:
+ *      summary: Creates a new user
+ *      requestBody:
+ *       content:
+ *        application/x-www-form-urlencoded:
+ *          schema:
+ *            type: object
+ *            properties:
+ *              email:
+ *                type: string
+ *              password:
+ *                type: string
+ *            required:
+ *              - firstName
+ *              - lastName
+ *              - email
+ *              - password
+ *      responses:
+ *        200:
+ *          description: User created successfully
+ *        400:
+ *          description: Missing required fields | Only POST method allowed
+ *        401:
+ *          description: Password is not valid
+ *        404:
+ *          description: User does not exist
+ *        500:
+ *          description: Server Error
  */
 export default async function handler(req, res) {
   // Validate request method

@@ -17,6 +17,7 @@ const Protected = ({ children }) => {
     "/user/signUp",
     "/restaurant/signIn",
     "/restaurant/signUp",
+    "/api-doc",
   ];
 
   if (typeof window !== "undefined") {

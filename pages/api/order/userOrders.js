@@ -21,7 +21,6 @@ const handler = async (req, res) => {
   // Validate user id
   const userId = req.id;
 
-  console.log(userId);
   if (!userId) {
     return res.status(400).json({
       message: "Missing user id",

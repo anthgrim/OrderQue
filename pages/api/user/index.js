@@ -10,6 +10,42 @@ import bcrypt from "bcrypt";
  * @param {import("next").NextApiRequest} req
  * @param {import("next").NextApiResponse} res
  */
+
+/**
+ * @swagger
+ * paths:
+ *  /api/user:
+ *    post:
+ *      summary: Creates a new user
+ *      requestBody:
+ *       content:
+ *        application/x-www-form-urlencoded:
+ *          schema:
+ *            type: object
+ *            properties:
+ *              firstName:
+ *                type: string
+ *              lastName:
+ *                type: string
+ *              email:
+ *                type: string
+ *              password:
+ *                type: string
+ *            required:
+ *              - firstName
+ *              - lastName
+ *              - email
+ *              - password
+ *      responses:
+ *        200:
+ *          description: User created successfully
+ *        400:
+ *          description: Missing required fields | Only POST method allowed
+ *        409:
+ *          description: Email is already registered
+ *        500:
+ *          description: Server Error
+ */
 export default async function handler(req, res) {
   // Validate request method
   if (req.method !== "POST") {

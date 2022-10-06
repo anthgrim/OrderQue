@@ -1,6 +1,11 @@
 .main {
+  height: 100%;
   padding: 5px 130px;
   margin: 15px 0;
+}
+
+.cart_container {
+  height: 90vh;
 }
 
 .title {

@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useRouter } from "next/router";
 import axios from "axios";
 import useAuth from "../hooks/useAuth";
 import Link from "next/link";
@@ -10,6 +11,7 @@ import useData from "../hooks/useData";
 
 const Navbar = () => {
   const { setAuth, currentUser, setCurrentUser } = useAuth();
+  const router = useRouter();
   const { cart, setCart } = useData();
   const [user, setUser] = useState("");
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -32,10 +34,12 @@ const Navbar = () => {
     if (typeof window !== "undefined") {
       localStorage.removeItem("accessToken");
       localStorage.removeItem("currentUser");
+      localStorage.removeItem("accountType");
     }
     setAuth({});
     setCurrentUser("");
     setCart([]);
+    router.push("/");
     return toast.success("See you next time!");
   };
 

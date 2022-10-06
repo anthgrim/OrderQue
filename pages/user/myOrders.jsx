@@ -18,13 +18,21 @@ const MyOrders = () => {
     orders.length === 0 ? (
       <p>No orders have been placed yet</p>
     ) : (
-      <p>There are some Orders</p>
+      orders.map((order, index) => {
+        return (
+          <li key={index}>
+            <div>
+              {order.number} - {order.total} - {order.date}
+            </div>
+          </li>
+        );
+      })
     );
 
   return (
     <>
       <h1>My Orders</h1>
-      {ordersList}
+      <ul>{ordersList}</ul>
     </>
   );
 };
