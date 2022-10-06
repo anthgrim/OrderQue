@@ -10,6 +10,22 @@ import verifyJwt from "../../../middlewares/verifyJWT";
  * @param {import("next").NextApiRequest} req
  * @param {import("next").NextApiResponse} res
  */
+
+/**
+ * @swagger
+ * paths:
+ *  /api/order/userOrders:
+ *    get:
+ *      tags: [Order]
+ *      summary: Get User Orders by userId
+ *      responses:
+ *        200:
+ *          description: Order created successfully
+ *        400:
+ *          description: Missing user id | Only GET method allowed
+ *        500:
+ *          description: Server Error
+ */
 const handler = async (req, res) => {
   // Validate request method
   if (req.method !== "GET") {

@@ -10,6 +10,41 @@ import verifyJwt from "../../../middlewares/verifyJWT";
  * @param {import("next").NextApiRequest} req
  * @param {import("next").NextApiResponse} res
  */
+
+/**
+ * @swagger
+ * paths:
+ *  /api/order:
+ *    post:
+ *      tags: [Order]
+ *      summary: Creates a new Order
+ *      requestBody:
+ *       content:
+ *        application/json:
+ *          schema:
+ *            type: object
+ *            properties:
+ *              restaurantId:
+ *                type: string
+ *              date:
+ *                type: date
+ *              total:
+ *                type: double
+ *              dishes:
+ *                type: array
+ *            required:
+ *              - restaurantId
+ *              - date
+ *              - total
+ *              - dishes
+ *      responses:
+ *        200:
+ *          description: Order created successfully
+ *        400:
+ *          description: Missing required fields | Only POST method allowed
+ *        500:
+ *          description: Server Error
+ */
 const handler = async (req, res) => {
   // Validate request method
   if (req.method !== "POST") {

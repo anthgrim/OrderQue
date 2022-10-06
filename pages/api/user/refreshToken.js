@@ -10,6 +10,32 @@ import jwt from "jsonwebtoken";
  * @param {import("next").NextApiRequest} req
  * @param {import("next").NextApiResponse} res
  */
+
+/**
+ * @swagger
+ * paths:
+ *  /api/user/refreshToken:
+ *    get:
+ *      tags: [User]
+ *      summary: Handle User Refresh Token
+ *      components:
+ *        securitySchemes:
+ *          cookieAuth:
+ *            type: apiKey
+ *            in: cookie
+ *            name: token
+ *      responses:
+ *        200:
+ *          description: OK
+ *        400:
+ *          description: Only GET method allowed
+ *        401:
+ *          description: Not Authorized
+ *        403:
+ *          description: Unable to authenticate
+ *        500:
+ *          description: Server Error
+ */
 export default async function handler(req, res) {
   // Validate request method
   if (req.method !== "GET") {

@@ -16,7 +16,7 @@ export const getStaticProps = async () => {
       openapi: "3.0.0",
       info: {
         title: "OrderQue.com API Documentation",
-        version: "1.0",
+        version: "0.0.1",
       },
     },
   });

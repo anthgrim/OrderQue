@@ -10,6 +10,28 @@ import cookie from "cookie";
  * @param {import("next").NextApiRequest} req
  * @param {import("next").NextApiResponse} res
  */
+
+/**
+ * @swagger
+ * paths:
+ *  /api/user/signOut:
+ *    post:
+ *      tags: [User]
+ *      summary: Sign Out User
+ *      components:
+ *        securitySchemes:
+ *          cookieAuth:
+ *            type: apiKey
+ *            in: cookie
+ *            name: token
+ *      responses:
+ *        204:
+ *          description: OK, no content
+ *        400:
+ *          description: Only POST method allowed
+ *        500:
+ *          description: Server Error
+ */
 export default async function handler(req, res) {
   // Validate request method
   if (req.method !== "POST") {

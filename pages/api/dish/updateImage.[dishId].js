@@ -10,6 +10,24 @@ import verifyJwt from "../../../middlewares/verifyJWT";
  * @param {import("next").NextApiRequest} req
  * @param {import("next").NextApiResponse} res
  */
+
+/**
+ * @swagger
+ * paths:
+ *  /api/dish/updateImage:
+ *    put:
+ *      tags: [Dish]
+ *      summary: Update dish image
+ *      responses:
+ *        200:
+ *          description: Dish image updated successfully
+ *        400:
+ *          description: Missing restaurant id | Missing dish id | Only GET method allowed
+ *        404:
+ *          description: Dish does not exist
+ *        500:
+ *          description: Server Error
+ */
 const handler = async (req, res) => {
   // Validate request method
   if (req.method === "PUT") {

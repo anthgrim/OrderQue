@@ -9,6 +9,22 @@ import Restaurant from "../../../models/restaurantModel";
  * @param {import("next").NextApiRequest} req
  * @param {import("next").NextApiResponse} res
  */
+
+/**
+ * @swagger
+ * paths:
+ *  /api/home/restaurants:
+ *    get:
+ *      tags: [Home]
+ *      summary: Get list of all restaurants
+ *      responses:
+ *        200:
+ *          description: New dish created successfully
+ *        400:
+ *          description: Only GET method allowed
+ *        500:
+ *          description: Server Error
+ */
 export default async function handler(req, res) {
   // Validate request method
   if (req.method !== "GET") {

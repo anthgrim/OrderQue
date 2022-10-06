@@ -9,10 +9,11 @@ import cookie from "cookie";
  * paths:
  *  /api/user/signIn:
  *    post:
- *      summary: Creates a new user
+ *      tags: [User]
+ *      summary: Sing In User
  *      requestBody:
  *       content:
- *        application/x-www-form-urlencoded:
+ *        application/json:
  *          schema:
  *            type: object
  *            properties:
@@ -21,13 +22,11 @@ import cookie from "cookie";
  *              password:
  *                type: string
  *            required:
- *              - firstName
- *              - lastName
  *              - email
  *              - password
  *      responses:
  *        200:
- *          description: User created successfully
+ *          description: Welcome, User!
  *        400:
  *          description: Missing required fields | Only POST method allowed
  *        401:

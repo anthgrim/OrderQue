@@ -12,6 +12,39 @@ import cookie from "cookie";
  * @param {import("next").NextApiRequest} req
  * @param {import("next").NextApiResponse} res
  */
+
+/**
+ * @swagger
+ * paths:
+ *  /api/restaurant/signIn:
+ *    post:
+ *      tags: [Restaurant]
+ *      summary: Sign In Restaurant
+ *      requestBody:
+ *       content:
+ *        application/json:
+ *          schema:
+ *            type: object
+ *            properties:
+ *              email:
+ *                type: string
+ *              password:
+ *                type: string
+ *            required:
+ *              - email
+ *              - password
+ *      responses:
+ *        200:
+ *          description: Welcome, Restaurant!
+ *        400:
+ *          description: Missing required fields | Only POST method allowed
+ *        401:
+ *          description: Password is not valid
+ *        404:
+ *          description: Restaurant does not exist
+ *        500:
+ *          description: Server Error
+ */
 export default async function handler(req, res) {
   // Validate request method
   if (req.method !== "POST") {

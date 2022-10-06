@@ -10,6 +10,22 @@ import Dish from "../../../models/dishModel";
  * @param {import("next").NextApiRequest} req
  * @param {import("next").NextApiResponse} res
  */
+
+/**
+ * @swagger
+ * paths:
+ *  /api/home/restaurant:
+ *    get:
+ *      tags: [Home]
+ *      summary: Get restaurant page by restaurant id
+ *      responses:
+ *        200:
+ *          description: New dish created successfully
+ *        400:
+ *          description: Missing restaurant id | Only GET method allowed
+ *        500:
+ *          description: Server Error
+ */
 export default async function handler(req, res) {
   // Validate request method
   if (req.method !== "GET") {

@@ -10,6 +10,43 @@ import bcrypt from "bcrypt";
  * @param {import("next").NextApiRequest} req
  * @param {import("next").NextApiResponse} res
  */
+
+/**
+ * @swagger
+ * paths:
+ *  /api/restaurant:
+ *    post:
+ *      tags: [Restaurant]
+ *      summary: Creates a new restaurant
+ *      requestBody:
+ *       content:
+ *        application/json:
+ *          schema:
+ *            type: object
+ *            properties:
+ *              name:
+ *                type: string
+ *              description:
+ *                type: string
+ *              email:
+ *                type: string
+ *              password:
+ *                type: string
+ *            required:
+ *              - name
+ *              - description
+ *              - email
+ *              - password
+ *      responses:
+ *        200:
+ *          description: Restaurant created successfully
+ *        400:
+ *          description: Missing required fields | Only POST method allowed
+ *        409:
+ *          description: Restaurant with name and email already exists
+ *        500:
+ *          description: Server Error
+ */
 export default async function handler(req, res) {
   // Validate request method
   if (req.method !== "POST") {
