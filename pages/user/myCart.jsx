@@ -14,9 +14,7 @@ const MyCart = ({ stripeKey }) => {
   const totalCartItem =
     cart.length === 0 ? 0 : cart.reduce((prev, curr) => prev + curr.total, 0);
 
-  const stripePromise = loadStripe(
-    "pk_test_51Ll1hBDnku4pw6z1pFXmmi8LHAl4Tf4ctTNZXYa4KiwUCHG95MXlOrLmHYpk5R56b18hzqeH2Se8WPwQvG3vQFyg00T4bayaU5"
-  );
+  const stripePromise = loadStripe(stripeKey);
 
   const toggleCheckOutForm = () => {
     setIsCheckOut((prev) => !prev);
@@ -68,7 +66,7 @@ const MyCart = ({ stripeKey }) => {
 
 export default MyCart;
 
-export async function getServerSidePros() {
+export async function getServerSideProps() {
   const stripeKey = process.env.STRIPE_PUBLIC_KEY;
 
   return {
