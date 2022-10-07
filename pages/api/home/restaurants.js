@@ -19,7 +19,7 @@ import Restaurant from "../../../models/restaurantModel";
  *      summary: Get list of all restaurants
  *      responses:
  *        200:
- *          description: New dish created successfully
+ *          description: Array of restaurants
  *        400:
  *          description: Only GET method allowed
  *        500:

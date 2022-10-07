@@ -18,9 +18,18 @@ import verifyJwt from "../../../middlewares/verifyJWT";
  *    get:
  *      tags: [Order]
  *      summary: Get User Orders by userId
+ *      components:
+ *        securitySchemes:
+ *          cookieAuth:
+ *            type: token
+ *            in: cookie
+ *            name: token
+ *      security:
+ *        - cookieAuth: []
+ *      description: Returns list of user orders
  *      responses:
  *        200:
- *          description: Order created successfully
+ *          description: Array of user orders
  *        400:
  *          description: Missing user id | Only GET method allowed
  *        500:

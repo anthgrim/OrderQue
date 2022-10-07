@@ -18,9 +18,13 @@ import Dish from "../../../models/dishModel";
  *    get:
  *      tags: [Home]
  *      summary: Get restaurant page by restaurant id
+ *      parameters:
+ *        - name: restaurantId
+ *          in: query
+ *          required: true
  *      responses:
  *        200:
- *          description: New dish created successfully
+ *          description: Restaurant general info and dishes
  *        400:
  *          description: Missing restaurant id | Only GET method allowed
  *        500:

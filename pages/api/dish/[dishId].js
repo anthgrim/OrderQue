@@ -17,10 +17,10 @@ import verifyJwt from "../../../middlewares/verifyJWT";
  *  /api/dish/:dishId:
  *    get:
  *      tags: [Dish]
- *      summary: Get dish by dish id
+ *      summary: Get dish by id
  *      responses:
  *        200:
- *          description: Ok, dishes
+ *          description: Ok
  *        400:
  *          description: Missing restaurant id | Missing dish id | Only GET method allowed
  *        404:

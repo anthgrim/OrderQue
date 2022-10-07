@@ -26,7 +26,15 @@ import cookie from "cookie";
  *              - password
  *      responses:
  *        200:
- *          description: Welcome, User!
+ *          description: This sets a jwt token as a httpOnly cookie which is the refresh token, and an access Token that can be added to the auth state
+ *          response:
+ *            application/json
+ *          headers:
+ *            Set-Cookie:
+ *              description: JWT token as a refreshToken in cookies
+ *              schema:
+ *                type: string
+ *                example: token=asdfasdfeqerqfadfasd; path=/; HttpOnly
  *        400:
  *          description: Missing required fields | Only POST method allowed
  *        401:
@@ -112,7 +120,6 @@ export default async function handler(req, res) {
       user,
       email: targetUser.email,
       id: targetUser.id,
-      refreshToken,
       accessToken,
     });
   } catch (error) {

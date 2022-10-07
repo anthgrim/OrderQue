@@ -26,7 +26,7 @@ import jwt from "jsonwebtoken";
  *            name: token
  *      responses:
  *        200:
- *          description: OK
+ *          description: OK - Access Token
  *        400:
  *          description: Only GET method allowed
  *        401:

@@ -20,7 +20,7 @@ import verifyJwt from "../../../middlewares/verifyJWT";
  *      summary: Get Order by Order id
  *      responses:
  *        200:
- *          description: OK, Order
+ *          description: Order
  *        400:
  *          description: Missing user Id | Missing order id | Only GET method allowed
  *        404:

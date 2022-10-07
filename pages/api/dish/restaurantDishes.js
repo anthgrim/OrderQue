@@ -20,7 +20,7 @@ import verifyJwt from "../../../middlewares/verifyJWT";
  *      summary: Get restaurant dishes by restaurant id
  *      responses:
  *        200:
- *          description: Ok, dishes
+ *          description: Ok
  *        400:
  *          description: Missing restaurant id | Only GET method allowed
  *        500:
