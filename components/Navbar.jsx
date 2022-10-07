@@ -34,7 +34,6 @@ const Navbar = () => {
   const signOutAction = async () => {
     await axios.post("/api/user/signOut");
     if (typeof window !== "undefined") {
-      localStorage.removeItem("accessToken");
       localStorage.removeItem("currentUser");
       localStorage.removeItem("accountType");
     }
