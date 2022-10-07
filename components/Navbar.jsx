@@ -14,10 +14,12 @@ const Navbar = () => {
   const router = useRouter();
   const { cart, setCart } = useData();
   const [user, setUser] = useState("");
+  const [accountType, setAccountType] = useState("");
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   useEffect(() => {
     setUser(currentUser);
+    setAccountType(localStorage.getItem("accountType"));
   }, [currentUser]);
 
   const toggleMobileMenu = () => {
@@ -84,27 +86,42 @@ const Navbar = () => {
               </>
             ) : (
               <>
-                <li className={styles.navbar_menu}>
-                  <Link href="/user/myOrders">
-                    <a>My Orders</a>
-                  </Link>
-                </li>
+                {accountType === "User" ? (
+                  <li className={styles.navbar_menu}>
+                    <Link href="/user/myOrders">
+                      <a>My Orders</a>
+                    </Link>
+                  </li>
+                ) : (
+                  <li className={styles.navbar_menu}>
+                    <Link href="/restaurant/admin">
+                      <a>Admin</a>
+                    </Link>
+                  </li>
+                )}
 
                 <li className={styles.navbar_menu}>
                   <a>{user}</a>
                 </li>
-                <li className={styles.navbar_menu}>
-                  <Link href="/user/myCart">
-                    <div className={styles.cart_container}>
-                      <span title="Cart">
-                        <AiOutlineShoppingCart className={styles.navbar_icon} />
-                      </span>
-                      <span className={styles.cart_quantity}>
-                        {totalCartQuantity}
-                      </span>
-                    </div>
-                  </Link>
-                </li>
+                {accountType !== "Restaurant" ? (
+                  <li className={styles.navbar_menu}>
+                    <Link href="/user/myCart">
+                      <div className={styles.cart_container}>
+                        <span title="Cart">
+                          <AiOutlineShoppingCart
+                            className={styles.navbar_icon}
+                          />
+                        </span>
+                        <span className={styles.cart_quantity}>
+                          {totalCartQuantity}
+                        </span>
+                      </div>
+                    </Link>
+                  </li>
+                ) : (
+                  <></>
+                )}
+
                 <li className={styles.navbar_menu} onClick={signOutAction}>
                   <Link href="/">
                     <a title="Sign Out">Sign Out</a>
@@ -117,7 +134,7 @@ const Navbar = () => {
         <div className={styles.mobile_navbar_container}>
           {user === "" ? (
             <></>
-          ) : (
+          ) : accountType === "User" ? (
             <div className={styles.navbar_menu_cart}>
               <Link href="/user/myCart">
                 <div className={styles.cart_container}>
@@ -130,6 +147,8 @@ const Navbar = () => {
                 </div>
               </Link>
             </div>
+          ) : (
+            <></>
           )}
           <div
             className={styles.navbar_menus_mobile}
@@ -180,9 +199,16 @@ const Navbar = () => {
               </>
             ) : (
               <>
-                <div className={styles.navbar_menu_mobile}>
-                  <Link href="/user/myOrders">My Orders</Link>
-                </div>
+                {accountType === "User" ? (
+                  <div className={styles.navbar_menu_mobile}>
+                    <Link href="/user/myOrders">My Orders</Link>
+                  </div>
+                ) : (
+                  <div className={styles.navbar_menu_mobile}>
+                    <Link href="/restaurant/admin">Admin</Link>
+                  </div>
+                )}
+
                 <div className={styles.navbar_menu_mobile}>{user}</div>
                 <div
                   className={styles.navbar_menu_mobile}

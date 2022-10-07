@@ -2,6 +2,7 @@ import { useState } from "react";
 import Link from "next/link";
 import axios from "axios";
 import styles from "../../styles/Forms.module.css";
+import { toast } from "react-toastify";
 
 const SignUp = () => {
   const [formData, setFormData] = useState({
@@ -29,11 +30,9 @@ const SignUp = () => {
         password: formData.password,
       });
 
-      console.log(res.data);
-      alert(res.data.message);
+      return toast.success(response.data.message);
     } catch (error) {
-      console.log(error);
-      alert(error.response.data.message);
+      return toast.error(error.response.data.message);
     }
   };
 

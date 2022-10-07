@@ -1,9 +1,13 @@
 import { useState } from "react";
+import Router from "next/router";
 import Link from "next/link";
 import axios from "axios";
+import useAuth from "../../hooks/useAuth";
 import styles from "../../styles/Forms.module.css";
+import { toast } from "react-toastify";
 
 const SignIn = () => {
+  const { setAuth, setCurrentUser } = useAuth();
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -24,10 +28,18 @@ const SignIn = () => {
         password: formData.password,
       });
 
-      console.log(res.data);
+      setAuth({ accessToken: res.data.accessToken });
+      setCurrentUser(res.data.user);
+      localStorage.setItem("currentUser", res.data.user);
+      localStorage.setItem("accountType", "Restaurant");
+      Router.push({
+        pathname: "/restaurant/admin",
+        query: { id: res.data.id },
+      });
+      return toast.success(res.data.message);
     } catch (error) {
       console.log(error);
-      alert(error.response.data.message);
+      return toast.error(error.response.data.message);
     }
   };
 

@@ -105,7 +105,7 @@ export default async function handler(req, res) {
     // Set cookie
     res.setHeader(
       "Set-Cookie",
-      cookie.serialize("jwt", refreshToken, {
+      cookie.serialize("token", refreshToken, {
         httpOnly: true,
         secure: true,
         sameSite: "strict",
@@ -114,8 +114,12 @@ export default async function handler(req, res) {
       })
     );
 
+    const name = targetRestaurant.name;
+
     return res.status(200).json({
-      message: `Welcome, ${targetRestaurant.name}!`,
+      message: `Welcome, ${name}!`,
+      user: name,
+      id: targetRestaurant._id,
       accessToken,
     });
   } catch (error) {
