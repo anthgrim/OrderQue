@@ -40,8 +40,19 @@ export default async function handler(req, res) {
     // Get restaurants
     const restaurants = await Restaurant.find().lean();
 
+    const filteredRestaurants =
+      restaurants.length > 0
+        ? restaurants.map((res) => {
+            return {
+              _id: res._id,
+              name: res.name,
+              description: res.description,
+            };
+          })
+        : [];
+
     return res.status(200).json({
-      restaurants,
+      restaurants: filteredRestaurants,
     });
   } catch (error) {
     console.log(error);
