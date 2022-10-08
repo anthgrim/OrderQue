@@ -38,14 +38,14 @@ const Admin = () => {
         }
       );
 
-      const path = response.data.path;
+      // const path = response.data.path;
 
-      const uploadResponse = await axiosPrivate.post(
-        "/api/restaurant/uploadLogo",
-        { path }
-      );
+      // const uploadResponse = await axiosPrivate.post(
+      //   "/api/restaurant/uploadLogo",
+      //   { path }
+      // );
 
-      console.log(uploadResponse.data);
+      console.log(response.data);
     } catch (error) {
       console.log(error);
     }
