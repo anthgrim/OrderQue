@@ -1,19 +1,7 @@
 import verifyJwt from "../../../middlewares/verifyJWT";
-import multer from "multer";
 import connectDb from "../../../config/connectDb";
 import Restaurant from "../../../models/restaurantModel";
 import nextConnect from "next-connect";
-
-const upload = multer({
-  storage: multer.diskStorage({
-    destination: "./uploads",
-    filename: (req, file, cb) => cb(null, `${req.id}_${file.originalname}`),
-  }),
-});
-
-// const hand = async (req, res) => {
-
-// }
 
 const handler = nextConnect({
   onError(error, req, res) {
