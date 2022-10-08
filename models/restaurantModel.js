@@ -20,8 +20,7 @@ const restaurantSchema = new Schema(
       required: true,
     },
     image: {
-      type: Buffer,
-      contentType: String,
+      type: Object,
     },
     refreshToken: {
       type: String,
