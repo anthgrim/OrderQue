@@ -4,7 +4,7 @@ import nextConnect from "next-connect";
 
 const upload = multer({
   storage: multer.diskStorage({
-    destination: "public/uploads",
+    destination: "uploads",
     filename: (req, file, cb) => cb(null, `${req.id}_${file.originalname}`),
   }),
 });
@@ -32,7 +32,7 @@ handler.use(upload.array("logo"));
 handler.post(async (req, res) => {
   res.status(200).json({
     message: "Success",
-    path: `public/uploads/${req.id}_${req.files[0].originalname}`,
+    path: `uploads/${req.id}_${req.files[0].originalname}`,
   });
 });
 
