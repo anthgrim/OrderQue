@@ -4,23 +4,14 @@ import verifyJwt from "../../../middlewares/verifyJWT";
 import aws from "aws-sdk";
 
 /**
- * @desc   Upload logo
- * @route  POST /api/restaurant/uploadLogo
+ * @desc   Delete aws key
+ * @route  POST /api/restaurant/deletePrevKey
  * @method PUT
  * @access Private
  * @param {import("next").NextApiRequest} req
  * @param {import("next").NextApiResponse} res
  */
-
 const handler = async (req, res) => {
-  const { url, key } = req.body;
-
-  if (!url || !key) {
-    return res.status(400).json({
-      message: "Missing required fields",
-    });
-  }
-
   const restaurantId = req.id;
 
   if (!restaurantId) {
@@ -33,7 +24,7 @@ const handler = async (req, res) => {
     // Connect to db
     await connectDb();
 
-    // Get target restaurant
+    // Get restaurant
     const targetRestaurant = await Restaurant.findById(restaurantId).exec();
 
     if (!targetRestaurant) {
@@ -42,13 +33,30 @@ const handler = async (req, res) => {
       });
     }
 
-    // Update image url and key
-    targetRestaurant.image = url;
-    targetRestaurant.awsKey = key;
-    await targetRestaurant.save();
+    // Delete previous image in aws s3 bucket
+    const targetKey = targetRestaurant.awsKey;
+
+    if (targetKey !== "") {
+      const s3 = new aws.S3();
+
+      await s3.deleteObject(
+        {
+          Bucket: process.env.S3_UPLOAD_BUCKET,
+          Key: targetKey,
+        },
+        (err, data) => {
+          if (err) {
+            return res.status(501).json({
+              message: "Could not delete previous image in s3",
+              err,
+            });
+          }
+        }
+      );
+    }
 
     return res.status(200).json({
-      message: "Image has linked to restaurant",
+      message: "OK",
     });
   } catch (error) {
     return res.status(500).json({

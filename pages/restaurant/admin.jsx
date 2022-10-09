@@ -24,15 +24,23 @@ const Admin = () => {
   }, []);
 
   const handleFileChange = async (file) => {
-    let response = await uploadToS3(file);
-    setImageURL(response.url);
+    try {
+      let response = await uploadToS3(file);
+      setImageURL(response.url);
 
-    const uploadRes = await axiosPrivate.put("/api/restaurant/uploadLogo", {
-      url: response.url,
-      key: response.key,
-    });
+      // Delete previous image
+      const deleteRes = await axiosPrivate.put("/api/restaurant/deletePrevKey");
 
-    return toast.success(uploadRes.data.message);
+      if (deleteRes.data.message === "OK") {
+        const uploadRes = await axiosPrivate.put("/api/restaurant/uploadLogo", {
+          url: response.url,
+          key: response.key,
+        });
+        return toast.success(uploadRes.data.message);
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
