@@ -86,6 +86,8 @@ export default async function handler(req, res) {
       description,
       email,
       password: hashedPassword,
+      image: "",
+      awsKey: "",
     });
 
     return res.status(200).json({

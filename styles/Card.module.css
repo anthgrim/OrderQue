@@ -17,6 +17,11 @@
   gap: 10px;
 }
 
+.card_image {
+  width: 300px;
+  height: 250px;
+}
+
 .card_description {
   text-align: center;
   color: var(--color-secondary);

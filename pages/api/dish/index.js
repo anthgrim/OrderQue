@@ -78,6 +78,8 @@ const handler = async (req, res) => {
       name,
       description,
       price,
+      image: "",
+      awsKey: "",
     });
 
     return res.status(200).json({

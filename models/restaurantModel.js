@@ -20,7 +20,12 @@ const restaurantSchema = new Schema(
       required: true,
     },
     image: {
-      type: Object,
+      type: String,
+      default: "",
+    },
+    awsKey: {
+      type: String,
+      default: "",
     },
     refreshToken: {
       type: String,

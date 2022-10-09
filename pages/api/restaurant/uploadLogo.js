@@ -1,26 +1,27 @@
 import connectDb from "../../../config/connectDb";
 import Restaurant from "../../../models/restaurantModel";
 import verifyJwt from "../../../middlewares/verifyJWT";
-import fs from "fs";
-import asyncFs from "fs/promises";
+import aws from "aws-sdk";
 
 /**
  * @desc   Upload logo
- * @route  POST /api/dish/
- * @method POST
+ * @route  POST /api/restaurant/uploadLogo
+ * @method PUT
  * @access Private
  * @param {import("next").NextApiRequest} req
  * @param {import("next").NextApiResponse} res
  */
 
 const handler = async (req, res) => {
-  const { path } = req.body;
+  const { url, key } = req.body;
 
-  if (!path) {
+  if (!url || !key) {
     return res.status(400).json({
-      message: "Missing file path",
+      message: "Missing required fields",
     });
   }
+
+  console.log(key);
 
   const restaurantId = req.id;
 
@@ -43,18 +44,35 @@ const handler = async (req, res) => {
       });
     }
 
-    //Upload image
-    targetRestaurant.image = {
-      data: fs.readFileSync(path),
-    };
+    // Delete previous image in aws s3 bucket
+    const targetKey = targetRestaurant.awsKey;
 
+    if (targetKey !== "") {
+      const s3 = new aws.S3();
+
+      await s3.deleteObject(
+        {
+          Bucket: process.env.S3_UPLOAD_BUCKET,
+          Key: targetKey,
+        },
+        (err, data) => {
+          if (err) {
+            return res.status(501).json({
+              message: "Could not delete previous image in s3",
+              err,
+            });
+          }
+        }
+      );
+    }
+
+    //Upload image
+    targetRestaurant.image = url;
+    targetRestaurant.awsKey = key;
     await targetRestaurant.save();
 
-    // Remove file
-    await asyncFs.unlink(path);
-
     return res.status(200).json({
-      message: "Image has been uploaded",
+      message: "Image has linked to restaurant",
     });
   } catch (error) {
     return res.status(500).json({

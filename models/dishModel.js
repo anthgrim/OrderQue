@@ -20,8 +20,12 @@ const dishSchema = new Schema(
       required: true,
     },
     image: {
-      type: Buffer,
-      contentType: String,
+      type: String,
+      default: "",
+    },
+    awsKey: {
+      type: String,
+      default: "",
     },
   },
   {

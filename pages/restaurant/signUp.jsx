@@ -30,9 +30,9 @@ const SignUp = () => {
         password: formData.password,
       });
 
-      return toast.success(response.data.message);
+      return toast.success(res.data.message);
     } catch (error) {
-      return toast.error(error.response.data.message);
+      return toast.error("Could not sign up :(. Server Error");
     }
   };
 

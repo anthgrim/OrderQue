@@ -22,7 +22,11 @@ const Card = ({ restaurantData }) => {
 
   return (
     <div className={styles.card}>
-      {/* <img src={restaurantData.image} alt="restaurant image" /> */}
+      <img
+        className={styles.card_image}
+        src={restaurantData.image}
+        alt="restaurantImage"
+      />
       <div className={styles.card_content}>
         <h2>{restaurantData.name}</h2>
         <p>{restaurantData.description}</p>
