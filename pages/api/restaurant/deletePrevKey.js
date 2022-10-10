@@ -67,20 +67,23 @@ const handler = async (req, res) => {
     if (targetKey !== "") {
       const s3 = new aws.S3();
 
-      await s3.deleteObject(
-        {
-          Bucket: process.env.S3_UPLOAD_BUCKET,
-          Key: targetKey,
-        },
-        (err, data) => {
-          if (err) {
-            return res.status(501).json({
-              message: "Could not delete previous image in s3",
-              err,
-            });
+      await s3
+        .deleteObject(
+          {
+            Bucket: process.env.S3_UPLOAD_BUCKET,
+            Key: targetKey,
+            VersionId: "null",
+          },
+          (err, data) => {
+            if (err) {
+              return res.status(501).json({
+                message: "Could not delete previous image in s3",
+                err,
+              });
+            }
           }
-        }
-      );
+        )
+        .promise();
     }
 
     return res.status(200).json({
