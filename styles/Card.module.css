@@ -17,13 +17,17 @@
   gap: 10px;
 }
 
+.image_container {
+  text-align: center;
+}
+
 .card_image {
-  width: 300px;
+  width: 275px;
   height: 250px;
 }
 
 .card_description {
-  text-align: center;
+  text-align: left;
   color: var(--color-secondary);
 }
 

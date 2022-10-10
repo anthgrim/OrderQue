@@ -2,14 +2,16 @@ import { useEffect, useState } from "react";
 import useAxiosPrivate from "../../hooks/useAxiosPrivate";
 import { useS3Upload } from "next-s3-upload";
 import { toast } from "react-toastify";
-import styles from "../../styles/Admin.module.css";
 import Dish from "../../components/Dish";
+import DishForm from "../../components/DishForm";
+import styles from "../../styles/Admin.module.css";
 
 const Admin = () => {
   const [restaurantData, setRestaurantData] = useState({});
   const [imageURL, setImageURL] = useState("");
   let { FileInput, openFileDialog, uploadToS3 } = useS3Upload();
   const [dishes, setDishes] = useState([]);
+  const [isFormOpen, setIsFormOpen] = useState(false);
   const axiosPrivate = useAxiosPrivate();
 
   useEffect(() => {
@@ -32,23 +34,23 @@ const Admin = () => {
     }
   }, []);
 
+  const toggleForm = () => setIsFormOpen((prev) => !prev);
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setRestaurantData((prev) => ({ ...prev, [name]: value }));
   };
 
   const handleUpdate = async () => {
-    if (
-      restaurantData.name.trim() === "" ||
-      restaurantData.description.trim() === ""
-    ) {
+    const { name, description } = restaurantData;
+    if (name.trim() === "" || description.trim() === "") {
       return toast.error("Restaurant information cannot be empty");
     }
 
     try {
       const updateResponse = await axiosPrivate.put("/api/restaurant/update", {
-        name: restaurantData.name,
-        description: restaurantData.description,
+        name,
+        description,
       });
 
       setRestaurantData(updateResponse.data.restaurant);
@@ -146,20 +148,28 @@ const Admin = () => {
         </div>
         <div className={styles.section_container}>
           <h3>My Dishes</h3>
-          <button className={styles.button}>Add new dish</button>
-          {dishes.length > 0 ? (
-            <div className={styles.dish_list}>
-              <div className={styles.dish}>
-                <span className={styles.header}>Actions</span>
-                <span className={styles.header}>Name</span>
-                <span className={styles.header}>Description</span>
-                <span className={styles.header}>Price</span>
-                <span className={styles.header}>Image</span>
-              </div>
-              {dishList}
-            </div>
+          {isFormOpen ? (
+            <DishForm onCancel={toggleForm} />
           ) : (
-            <p>No dishes have been added yet</p>
+            <>
+              <button className={styles.button} onClick={toggleForm}>
+                Add new dish
+              </button>
+              {dishes.length > 0 ? (
+                <div className={styles.dish_list}>
+                  <div className={styles.dish}>
+                    <span className={styles.header}>Actions</span>
+                    <span className={styles.header}>Name</span>
+                    <span className={styles.header}>Description</span>
+                    <span className={styles.header}>Price</span>
+                    <span className={styles.header}>Image</span>
+                  </div>
+                  {dishList}
+                </div>
+              ) : (
+                <p>No dishes have been added yet</p>
+              )}
+            </>
           )}
         </div>
       </div>

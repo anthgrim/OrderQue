@@ -38,7 +38,13 @@ const CardDish = ({ dishData }) => {
 
   return (
     <div className={styles.card}>
-      {/* <img src={dishData.image} alt="dish image" /> */}
+      <div className={styles.image_container}>
+        <img
+          className={styles.card_image}
+          src={dishData.image}
+          alt="dish image"
+        />
+      </div>
       <div className={styles.card_content}>
         <h2>{dishData.name}</h2>
         <p className={styles.card_description}>{dishData.description}</p>

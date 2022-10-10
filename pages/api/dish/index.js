@@ -60,9 +60,9 @@ const handler = async (req, res) => {
   }
 
   // Validate required fields
-  const { name, description, price } = req.body;
+  const { name, description, price, image, awsKey } = req.body;
 
-  if (!name || !description || !price) {
+  if (!name || !description || !price || !image || !awsKey) {
     return res.status(400).json({
       message: "Missing required fields",
     });
@@ -78,8 +78,8 @@ const handler = async (req, res) => {
       name,
       description,
       price,
-      image: "",
-      awsKey: "",
+      image,
+      awsKey,
     });
 
     return res.status(200).json({

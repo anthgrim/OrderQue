@@ -7,12 +7,14 @@ const Dish = ({ dishData }) => {
       <span>Actions</span>
       <span>{dishData?.name || ""}</span>
       <span>{dishData?.description || ""}</span>
-      <span>{dishData?.price || ""}</span>
-      <img
-        className={styles.dish_image}
-        src={dishData?.image}
-        alt="Dish image"
-      />
+      <span>${dishData?.price || ""}</span>
+      <div className={styles.dish_image_container}>
+        <img
+          className={styles.dish_image}
+          src={dishData?.image}
+          alt="Dish image"
+        />
+      </div>
     </div>
   );
 };
