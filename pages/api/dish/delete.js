@@ -1,7 +1,8 @@
 import connectDb from "../../../config/connectDb";
 import Dish from "../../../models/dishModel";
 import verifyJwt from "../../../middlewares/verifyJWT";
-import aws from "aws-sdk";
+import { DeleteObjectCommand } from "@aws-sdk/client-s3";
+import { S3Client } from "@aws-sdk/client-s3";
 
 /**
  * @desc   Delete restaurant dish by dish id
@@ -82,24 +83,17 @@ const handler = async (req, res) => {
 
     // Delete image in s3 bucket
     const targetKey = targetDish.awsKey;
+    let s3Data;
 
     if (targetKey !== "") {
-      const s3 = new aws.S3();
+      const s3Client = new S3Client({ region: process.env.S3_UPLOAD_REGION });
 
-      await s3.deleteObject(
-        {
-          Bucket: process.env.S3_UPLOAD_BUCKET,
-          Key: targetKey,
-        },
-        (err, data) => {
-          if (err) {
-            return res.status(501).json({
-              message: "Could not delete image in s3",
-              err,
-            });
-          }
-        }
-      );
+      const bucketParams = {
+        Bucket: process.env.S3_UPLOAD_BUCKET,
+        Key: targetKey,
+      };
+
+      s3Data = await s3Client.send(new DeleteObjectCommand(bucketParams));
     }
 
     // Delete dish
@@ -107,6 +101,7 @@ const handler = async (req, res) => {
 
     return res.status(200).json({
       message: "Dish deleted successfully",
+      s3Data,
     });
   } catch (error) {
     return res.status(500).json({
