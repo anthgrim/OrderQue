@@ -1,0 +1,75 @@
+.dialog {
+  position: fixed;
+  background: #00000050;
+  width: 100%;
+  height: 100vh;
+  top: 0;
+  left: 0;
+}
+
+.dialog_box {
+  position: relative;
+  width: fit-content;
+  height: auto;
+  max-height: 70vh;
+  margin-top: calc(100vh - 85vh - 20px);
+  background: #fff;
+  border-radius: 3px;
+  padding: 20px;
+  border: none;
+  border-radius: 10px;
+  top: 100px;
+  left: 33%;
+  box-shadow: 0px 5px 7px rgb(146, 146, 146);
+  overflow: auto;
+}
+
+.title {
+  font-size: 2rem;
+  color: var(--color-primary);
+  font-weight: bold;
+}
+
+.content {
+  color: var(--color-secondary);
+}
+
+.button_group {
+  margin-top: 30px;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.button {
+  padding: 5px;
+  font-size: 1.1rem;
+  background-color: var(--color-primary);
+  color: white;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: 0.3s ease-in-out;
+}
+
+.button_cancel {
+  padding: 5px;
+  font-size: 1.1rem;
+  background-color: white;
+  color: var(--color-primary);
+  border: 1px solid var(--color-primary);
+  border-radius: 3px;
+  cursor: pointer;
+  transition: 0.3s ease-in-out;
+}
+
+.button_cancel:hover {
+  background-color: var(--color-secondary);
+  transform: translateY(-5px);
+  border-color: var(--color-secondary);
+  color: white;
+}
+
+.button:hover {
+  background-color: var(--color-hightlight);
+  transform: translateY(-5px);
+}

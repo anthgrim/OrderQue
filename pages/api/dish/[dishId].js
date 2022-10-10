@@ -1,6 +1,7 @@
 import connectDb from "../../../config/connectDb";
 import Dish from "../../../models/dishModel";
 import verifyJwt from "../../../middlewares/verifyJWT";
+import aws from "aws-sdk";
 
 /**
  * @desc   Get, Update or Delete restaurant dish by dish id
@@ -29,13 +30,6 @@ import verifyJwt from "../../../middlewares/verifyJWT";
  *          description: Server Error
  */
 const handler = async (req, res) => {
-  // Validate request method
-  if (req.method === "POST") {
-    return res.status(400).json({
-      message: "Only GET PUT and DELETE methods allowed",
-    });
-  }
-
   // Validate user id
   const restaurantId = req.id;
 
@@ -97,6 +91,27 @@ const handler = async (req, res) => {
         break;
 
       case "DELETE":
+        const targetKey = targetDish.awsKey;
+
+        if (targetKey !== "") {
+          const s3 = new aws.S3();
+
+          await s3.deleteObject(
+            {
+              Bucket: process.env.S3_UPLOAD_BUCKET,
+              Key: targetKey,
+            },
+            (err, data) => {
+              if (err) {
+                return res.status(501).json({
+                  message: "Could not delete image in s3",
+                  err,
+                });
+              }
+            }
+          );
+        }
+
         // Delete dish in db
         await targetDish.delete();
 
