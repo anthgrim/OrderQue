@@ -3,6 +3,7 @@ import useAxiosPrivate from "../../hooks/useAxiosPrivate";
 import { useS3Upload } from "next-s3-upload";
 import { toast } from "react-toastify";
 import styles from "../../styles/Admin.module.css";
+import Dish from "../../components/Dish";
 
 const Admin = () => {
   const [restaurantData, setRestaurantData] = useState({});
@@ -81,6 +82,15 @@ const Admin = () => {
     }
   };
 
+  const dishList =
+    dishes.length === 0 ? (
+      <></>
+    ) : (
+      dishes.map((dish, index) => {
+        return <Dish key={index} dishData={dish} />;
+      })
+    );
+
   return (
     <div className={styles.main}>
       <h1>Welcome, {restaurantData?.name}!</h1>
@@ -134,7 +144,24 @@ const Admin = () => {
             />
           </section>
         </div>
-        <div>Dishes</div>
+        <div className={styles.section_container}>
+          <h3>My Dishes</h3>
+          <button className={styles.button}>Add new dish</button>
+          {dishes.length > 0 ? (
+            <div className={styles.dish_list}>
+              <div className={styles.dish}>
+                <span className={styles.header}>Actions</span>
+                <span className={styles.header}>Name</span>
+                <span className={styles.header}>Description</span>
+                <span className={styles.header}>Price</span>
+                <span className={styles.header}>Image</span>
+              </div>
+              {dishList}
+            </div>
+          ) : (
+            <p>No dishes have been added yet</p>
+          )}
+        </div>
       </div>
     </div>
   );

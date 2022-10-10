@@ -71,6 +71,36 @@
   height: 300px;
 }
 
+.dish_list {
+  padding: 20px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  overflow: hidden;
+  overflow-y: scroll;
+  height: 550px;
+}
+
+.header {
+  font-weight: bold;
+  color: var(--color-secondary);
+}
+
+.dish {
+  padding: 5px 0;
+  border-top: 1px solid var(--color-secondary);
+  border-bottom: 1px solid var(--color-secondary);
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  align-items: center;
+  text-align: center;
+}
+
+.dish_image {
+  width: 50px;
+  height: 50px;
+}
+
 @media (max-width: 820px) {
   .main {
     padding: 5px 30px;
