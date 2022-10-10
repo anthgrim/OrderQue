@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import useAxiosPrivate from "../../hooks/useAxiosPrivate";
+import OrderITem from "../../components/OrderITem";
+import styles from "../../styles/MyOrders.module.css";
 
 const MyOrders = () => {
   const [orders, setOrders] = useState([]);
@@ -19,21 +21,22 @@ const MyOrders = () => {
       <p>No orders have been placed yet</p>
     ) : (
       orders.map((order, index) => {
-        return (
-          <li key={index}>
-            <div>
-              {order.number} - {order.total} - {order.date}
-            </div>
-          </li>
-        );
+        return <OrderITem key={index} orderData={order} />;
       })
     );
 
   return (
-    <>
-      <h1>My Orders</h1>
-      <ul>{ordersList}</ul>
-    </>
+    <div className={styles.main}>
+      <h1 className={styles.title}>My Orders</h1>
+      <div className={styles.list_headers}>
+        <div className={styles.headers}>
+          <span>Order Number</span>
+          <span>Date</span>
+          <span>Total</span>
+        </div>
+      </div>
+      <div className={styles.list_container}>{ordersList}</div>
+    </div>
   );
 };
 
