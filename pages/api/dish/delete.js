@@ -86,7 +86,13 @@ const handler = async (req, res) => {
     let s3Data;
 
     if (targetKey !== "") {
-      const s3Client = new S3Client({ region: process.env.S3_UPLOAD_REGION });
+      const s3Client = new S3Client({
+        region: process.env.S3_UPLOAD_REGION,
+        credentials: {
+          secretAccessKey: process.env.S3_UPLOAD_SECRET,
+          accessKeyId: process.env.S3_UPLOAD_KEY,
+        },
+      });
 
       const bucketParams = {
         Bucket: process.env.S3_UPLOAD_BUCKET,
