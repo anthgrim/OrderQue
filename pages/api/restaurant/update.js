@@ -4,11 +4,42 @@ import verifyJwt from "../../../middlewares/verifyJWT";
 
 /**
  * @desc   Update Restaurant Information
- * @route  PUT /api/home/update
+ * @route  PUT /api/restaurant/update
  * @method PUT
  * @access Private
  * @param {import("next").NextApiRequest} req
  * @param {import("next").NextApiResponse} res
+ */
+
+/**
+ * @swagger
+ * paths:
+ *  /api/restaurant/update:
+ *    put:
+ *      tags: [Restaurant]
+ *      summary: Updates name and description of the restaurant
+ *      requestBody:
+ *       content:
+ *        application/json:
+ *          schema:
+ *            type: object
+ *            properties:
+ *              name:
+ *                type: string
+ *              description:
+ *                type: string
+ *            required:
+ *              - name
+ *              - description
+ *      responses:
+ *        200:
+ *          description: Restaurant updated successfully
+ *        400:
+ *          description: Only PUT method allowed || Missing restaurant id || Missing required fields
+ *        404:
+ *          description: Restaurant does not exist
+ *        500:
+ *          description: Server Error
  */
 const handler = async (req, res) => {
   // Validate request method
@@ -41,16 +72,17 @@ const handler = async (req, res) => {
     await connectDb();
 
     // Get target restaurant
-    const targetRestaurant = await Restaurant.findByIdAndUpdate(restaurantId, {
-      name,
-      description,
-    });
+    const targetRestaurant = await Restaurant.findById(restaurantId).exec();
 
     if (!targetRestaurant) {
       return res.status(404).json({
         message: "Restaurant does not exist",
       });
     }
+
+    targetRestaurant.name = name;
+    targetRestaurant.description = description;
+    await targetRestaurant.save();
 
     return res.status(200).json({
       message: "Restaurant updated successfully",

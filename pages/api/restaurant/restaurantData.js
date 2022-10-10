@@ -10,6 +10,24 @@ import verifyJWT from "../../../middlewares/verifyJWT";
  * @param {import("next").NextApiRequest} req
  * @param {import("next").NextApiResponse} res
  */
+
+/**
+ * @swagger
+ * paths:
+ *  /api/restaurant/restaurantData:
+ *    get:
+ *      tags: [Restaurant]
+ *      summary: Get restaurant information
+ *      responses:
+ *        200:
+ *          description: Restaurant Object
+ *        400:
+ *          description: Only GET method allowed || Missing restaurant id
+ *        404:
+ *          description: Restaurant does not exist
+ *        500:
+ *          description: Server Error
+ */
 const handler = async (req, res) => {
   // Validate request method
   if (req.method !== "GET") {

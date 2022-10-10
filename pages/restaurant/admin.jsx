@@ -37,6 +37,13 @@ const Admin = () => {
   };
 
   const handleUpdate = async () => {
+    if (
+      restaurantData.name.trim() === "" ||
+      restaurantData.description.trim() === ""
+    ) {
+      return toast.error("Restaurant information cannot be empty");
+    }
+
     try {
       const updateResponse = await axiosPrivate.put("/api/restaurant/update", {
         name: restaurantData.name,

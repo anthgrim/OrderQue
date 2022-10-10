@@ -11,7 +11,34 @@ import aws from "aws-sdk";
  * @param {import("next").NextApiRequest} req
  * @param {import("next").NextApiResponse} res
  */
+
+/**
+ * @swagger
+ * paths:
+ *  /api/restaurant/deletePrevKey:
+ *    delete:
+ *      tags: [Restaurant]
+ *      summary: Deletes current aws key for image
+ *      responses:
+ *        200:
+ *          description: OK
+ *        400:
+ *          description: Only DELETE method allowed || Missing restaurant id
+ *        404:
+ *          description: Restaurant does not exist
+ *        500:
+ *          description: Server Error
+ *        501:
+ *          description: Could not delete previous image in s3
+ */
 const handler = async (req, res) => {
+  // Validate request method
+  if (req.method !== "DELETE") {
+    return res.status(400).json({
+      message: "Only DELETE method allowed",
+    });
+  }
+
   // Validate restaurant id
   const restaurantId = req.id;
 
@@ -30,7 +57,7 @@ const handler = async (req, res) => {
 
     if (!targetRestaurant) {
       return res.status(404).json({
-        message: "Restaurant not found",
+        message: "Restaurant does not exist",
       });
     }
 

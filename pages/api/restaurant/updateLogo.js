@@ -11,6 +11,37 @@ import aws from "aws-sdk";
  * @param {import("next").NextApiRequest} req
  * @param {import("next").NextApiResponse} res
  */
+
+/**
+ * @swagger
+ * paths:
+ *  /api/restaurant/updateLogo:
+ *    put:
+ *      tags: [Restaurant]
+ *      summary: Updates new url and key from aws for the images
+ *      requestBody:
+ *       content:
+ *        application/json:
+ *          schema:
+ *            type: object
+ *            properties:
+ *              url:
+ *                type: string
+ *              key:
+ *                type: string
+ *            required:
+ *              - url
+ *              - key
+ *      responses:
+ *        200:
+ *          description: Image has been linked to restaurant
+ *        400:
+ *          description: Only PUT method allowed || Missing restaurant id || Missing required fields
+ *        404:
+ *          description: Restaurant does not exist
+ *        500:
+ *          description: Server Error
+ */
 const handler = async (req, res) => {
   // Validate request method
   if (req.method !== "PUT") {
@@ -46,7 +77,7 @@ const handler = async (req, res) => {
 
     if (!targetRestaurant) {
       return res.status(404).json({
-        message: "Restaurant not found",
+        message: "Restaurant does not exist",
       });
     }
 
@@ -56,7 +87,7 @@ const handler = async (req, res) => {
     await targetRestaurant.save();
 
     return res.status(200).json({
-      message: "Image has linked to restaurant",
+      message: "Image has been linked to restaurant",
     });
   } catch (error) {
     return res.status(500).json({
