@@ -29,6 +29,7 @@ const CardDish = ({ dishData }) => {
       price: dishData.price,
       quantity: quantity,
       total: quantity * dishData.price,
+      image: dishData.image,
     };
 
     addItem(newItem, quantity);

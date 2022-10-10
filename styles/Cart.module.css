@@ -27,6 +27,15 @@
   gap: 20px;
 }
 
+.cart_item_image_container {
+  text-align: center;
+}
+
+.cart_item_image {
+  width: 75px;
+  height: 75px;
+}
+
 .cart_item_header {
   margin: 10px 0;
   padding: 5px;

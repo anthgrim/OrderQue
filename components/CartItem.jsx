@@ -6,7 +6,13 @@ const CartItem = ({ itemData }) => {
   const { decreaseItemQuantity, increaseItemQuantity } = useData();
   return (
     <div className={styles.cart_item}>
-      <div className={styles.cart_item_image}>Image</div>
+      <div className={styles.cart_item_image_container}>
+        <img
+          className={styles.cart_item_image}
+          src={itemData.image}
+          alt="Dish Image"
+        />
+      </div>
       <div className={styles.cart_item_info}>
         <span className={styles.cart_item_name}>{itemData.name}</span>
         <span className={styles.cart_item_description}>
