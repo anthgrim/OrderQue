@@ -36,7 +36,7 @@ import verifyJwt from "../../../middlewares/verifyJWT";
  *              - price
  *      responses:
  *        200:
- *          description: New dish created successfully
+ *          description: New dish created successfully | Dish object
  *        400:
  *          description: Missing restaurant id | Missing required fields | Only POST method allowed
  *        500:
@@ -84,6 +84,7 @@ const handler = async (req, res) => {
 
     return res.status(200).json({
       message: `Dish ${newDish.name} created successfully`,
+      dish: newDish,
     });
   } catch (error) {
     return res.status(500).json({

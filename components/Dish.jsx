@@ -5,7 +5,7 @@ import Dialog from "./Dialog";
 import styles from "../styles/Admin.module.css";
 import { toast } from "react-toastify";
 
-const Dish = ({ dishData, targetIndex, listSetter }) => {
+const Dish = ({ dishData, listSetter }) => {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const axiosPrivate = useAxiosPrivate();
 
@@ -19,7 +19,7 @@ const Dish = ({ dishData, targetIndex, listSetter }) => {
         data: { dishId },
       });
 
-      listSetter(dishId);
+      listSetter(dishId, "Delete");
       toggleDialog();
       return toast.success(response.data.message);
     } catch (error) {

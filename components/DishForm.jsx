@@ -4,7 +4,7 @@ import useAxiosPrivate from "../hooks/useAxiosPrivate";
 import { toast } from "react-toastify";
 import styles from "../styles/DishForm.module.css";
 
-const DishForm = ({ onCancel }) => {
+const DishForm = ({ formToggler, listSetter }) => {
   let { FileInput, openFileDialog, uploadToS3 } = useS3Upload();
   const axiosPrivate = useAxiosPrivate();
   const [formData, setFormData] = useState({
@@ -58,7 +58,8 @@ const DishForm = ({ onCancel }) => {
         awsKey,
       });
 
-      window.location.reload();
+      listSetter(response.data.dish._id, "Add", response.data.dish);
+      formToggler();
       return toast.success(response.data.message);
     } catch (error) {
       console.log(error);
@@ -69,7 +70,10 @@ const DishForm = ({ onCancel }) => {
   return (
     <div>
       <div className={styles.button_container}>
-        <button className={styles.button_action_secondary} onClick={onCancel}>
+        <button
+          className={styles.button_action_secondary}
+          onClick={formToggler}
+        >
           Cancel
         </button>
         <button className={styles.button_action} onClick={handleSubmit}>
