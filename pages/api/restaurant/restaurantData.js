@@ -1,26 +1,24 @@
 import connectDb from "../../../config/connectDb";
 import Restaurant from "../../../models/restaurantModel";
-import verifyJwt from "../../../middlewares/verifyJWT";
-import aws from "aws-sdk";
+import verifyJWT from "../../../middlewares/verifyJWT";
 
 /**
- * @desc   Upload logo
- * @route  POST /api/restaurant/uploadLogo
- * @method PUT
+ * @desc   Get restaurant information
+ * @route  GET /api/restaurant/restaurantData
+ * @method GET
  * @access Private
  * @param {import("next").NextApiRequest} req
  * @param {import("next").NextApiResponse} res
  */
-
 const handler = async (req, res) => {
-  const { url, key } = req.body;
-
-  if (!url || !key) {
+  // Validate request method
+  if (req.method !== "GET") {
     return res.status(400).json({
-      message: "Missing required fields",
+      message: "Only GET method allowed",
     });
   }
 
+  // Verify restaurant id
   const restaurantId = req.id;
 
   if (!restaurantId) {
@@ -30,32 +28,27 @@ const handler = async (req, res) => {
   }
 
   try {
-    // Connect to db
+    // Connect to Db
     await connectDb();
 
-    // Get target restaurant
+    // Get restaurant data
     const targetRestaurant = await Restaurant.findById(restaurantId).exec();
 
     if (!targetRestaurant) {
       return res.status(404).json({
-        message: "Restaurant not found",
+        message: "Restaurant does not exist",
       });
     }
 
-    // Update image url and key
-    targetRestaurant.image = url;
-    targetRestaurant.awsKey = key;
-    await targetRestaurant.save();
-
     return res.status(200).json({
-      message: "Image has linked to restaurant",
+      restaurant: targetRestaurant,
     });
   } catch (error) {
     return res.status(500).json({
       message: "Server Error",
-      error: error.message,
+      error,
     });
   }
 };
 
-export default verifyJwt(handler, "Restaurant");
+export default verifyJWT(handler, "Restaurant");

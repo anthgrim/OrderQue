@@ -1,17 +1,23 @@
 import connectDb from "../../../config/connectDb";
 import Restaurant from "../../../models/restaurantModel";
 import verifyJwt from "../../../middlewares/verifyJWT";
-import aws from "aws-sdk";
 
 /**
- * @desc   Delete aws key
- * @route  DELETE /api/restaurant/deletePrevKey
- * @method DELETE
+ * @desc   Update Restaurant Information
+ * @route  PUT /api/home/update
+ * @method PUT
  * @access Private
  * @param {import("next").NextApiRequest} req
  * @param {import("next").NextApiResponse} res
  */
 const handler = async (req, res) => {
+  // Validate request method
+  if (req.method !== "PUT") {
+    return res.status(400).json({
+      message: "Only PUT method allowed",
+    });
+  }
+
   // Validate restaurant id
   const restaurantId = req.id;
 
@@ -21,48 +27,39 @@ const handler = async (req, res) => {
     });
   }
 
+  // Validate required fields
+  const { name, description } = req.body;
+
+  if (!name || !description) {
+    return res.status(400).json({
+      message: "Missing required fields",
+    });
+  }
+
   try {
     // Connect to db
     await connectDb();
 
-    // Get restaurant
-    const targetRestaurant = await Restaurant.findById(restaurantId).exec();
+    // Get target restaurant
+    const targetRestaurant = await Restaurant.findByIdAndUpdate(restaurantId, {
+      name,
+      description,
+    });
 
     if (!targetRestaurant) {
       return res.status(404).json({
-        message: "Restaurant not found",
+        message: "Restaurant does not exist",
       });
     }
 
-    // Delete previous image in aws s3 bucket
-    const targetKey = targetRestaurant.awsKey;
-
-    if (targetKey !== "") {
-      const s3 = new aws.S3();
-
-      await s3.deleteObject(
-        {
-          Bucket: process.env.S3_UPLOAD_BUCKET,
-          Key: targetKey,
-        },
-        (err, data) => {
-          if (err) {
-            return res.status(501).json({
-              message: "Could not delete previous image in s3",
-              err,
-            });
-          }
-        }
-      );
-    }
-
     return res.status(200).json({
-      message: "OK",
+      message: "Restaurant updated successfully",
+      restaurant: targetRestaurant,
     });
   } catch (error) {
     return res.status(500).json({
       message: "Server Error",
-      error: error.message,
+      error,
     });
   }
 };
