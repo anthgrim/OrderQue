@@ -1,12 +1,14 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useS3Upload } from "next-s3-upload";
 import useAxiosPrivate from "../hooks/useAxiosPrivate";
 import { toast } from "react-toastify";
 import styles from "../styles/DishForm.module.css";
 
-const DishForm = ({ formToggler, listSetter }) => {
+const DishForm = ({ formToggler, listSetter, dishObject }) => {
   let { FileInput, openFileDialog, uploadToS3 } = useS3Upload();
   const axiosPrivate = useAxiosPrivate();
+  const [isNewImage, setIsNewImage] = useState(false);
+  const [isEdit, setIsEdit] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
     description: "",
@@ -14,6 +16,14 @@ const DishForm = ({ formToggler, listSetter }) => {
     image: "",
     awsKey: "",
   });
+
+  // Listen if there's a dish object
+  useEffect(() => {
+    if (dishObject.hasOwnProperty("_id")) {
+      setFormData(dishObject);
+      setIsEdit(true);
+    }
+  }, []);
 
   const handleChange = (e) => {
     setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
@@ -27,6 +37,10 @@ const DishForm = ({ formToggler, listSetter }) => {
         image: s3Response.url,
         awsKey: s3Response.key,
       }));
+
+      if (isEdit) {
+        setIsNewImage(true);
+      }
     } catch (error) {
       console.log(error);
       toast.error("Could not upload image");
@@ -50,15 +64,46 @@ const DishForm = ({ formToggler, listSetter }) => {
     }
 
     try {
-      const response = await axiosPrivate.post("/api/dish/", {
-        name,
-        description,
-        price,
-        image,
-        awsKey,
-      });
+      let response;
 
-      listSetter(response.data.dish._id, "Add", response.data.dish);
+      if (isEdit) {
+        if (isNewImage) {
+          // Delete previous image in s3
+          const s3DeletionResponse = await axiosPrivate.delete(
+            "/api/dish/deletePrevKey",
+            { data: { dishId: dishObject._id } }
+          );
+
+          console.log(s3DeletionResponse.data);
+        }
+
+        // Edit dish in db
+        response = await axiosPrivate.put("/api/dish/update", {
+          dishId: dishObject._id,
+          name,
+          description,
+          price,
+          image,
+          awsKey,
+        });
+
+        // Update dishes list in client
+        listSetter(response.data.dish._id, "Edit", response.data.dish);
+        setIsNewImage(false);
+      } else {
+        // Create dish in db
+        response = await axiosPrivate.post("/api/dish/", {
+          name,
+          description,
+          price,
+          image,
+          awsKey,
+        });
+
+        // Update dishes list in client
+        listSetter(response.data.dish._id, "Add", response.data.dish);
+      }
+
       formToggler();
       return toast.success(response.data.message);
     } catch (error) {
@@ -67,17 +112,27 @@ const DishForm = ({ formToggler, listSetter }) => {
     }
   };
 
+  const onCancel = () => {
+    setFormData({
+      name: "",
+      description: "",
+      price: 0,
+      image: "",
+      awsKey: "",
+    });
+    setIsEdit(false);
+    setIsNewImage(false);
+    formToggler();
+  };
+
   return (
     <div>
       <div className={styles.button_container}>
-        <button
-          className={styles.button_action_secondary}
-          onClick={formToggler}
-        >
+        <button className={styles.button_action_secondary} onClick={onCancel}>
           Cancel
         </button>
         <button className={styles.button_action} onClick={handleSubmit}>
-          Add Dish
+          {isEdit ? "Edit Dish" : "Add Dish"}
         </button>
       </div>
       <div className={styles.form_row}>

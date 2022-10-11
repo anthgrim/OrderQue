@@ -5,7 +5,7 @@ import Dialog from "./Dialog";
 import styles from "../styles/Admin.module.css";
 import { toast } from "react-toastify";
 
-const Dish = ({ dishData, listSetter }) => {
+const Dish = ({ dishData, listSetter, onEdit }) => {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const axiosPrivate = useAxiosPrivate();
 
@@ -32,7 +32,11 @@ const Dish = ({ dishData, listSetter }) => {
     <>
       <div className={styles.dish}>
         <div className={styles.icons_container}>
-          <AiFillEdit className={styles.icon_edit} title="Edit" />
+          <AiFillEdit
+            className={styles.icon_edit}
+            title="Edit"
+            onClick={() => onEdit(dishData)}
+          />
           <AiFillDelete
             className={styles.icon_delete}
             title="Delete"

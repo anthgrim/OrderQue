@@ -7,6 +7,7 @@ import { toast } from "react-toastify";
 
 const RestaurantDishes = () => {
   const [dishes, setDishes] = useState([]);
+  const [targetDish, setTargetDish] = useState({});
   const [isFormOpen, setIsFormOpen] = useState(false);
   const axiosPrivate = useAxiosPrivate();
 
@@ -28,21 +29,44 @@ const RestaurantDishes = () => {
   }, []);
 
   // Toggle dish form
-  const toggleForm = () => setIsFormOpen((prev) => !prev);
+  const toggleForm = () => {
+    setTargetDish({});
+    setIsFormOpen((prev) => !prev);
+  };
+
+  const onEditDishToggler = (dish) => {
+    setTargetDish(dish);
+    setIsFormOpen((prev) => !prev);
+  };
 
   // Handle dishList update
   /**
    *
    * @param {String} dishId
    * @param {String} actionEvent: Delete or Add
-   * @param {Objet} newDish
+   * @param {Objet} dishObject
    */
-  const listSetter = (dishId, actionEvent, newDish = {}) => {
+  const listSetter = (dishId, actionEvent, dishObject = {}) => {
     if (actionEvent === "Delete") {
       const newList = dishes.filter((dish) => dish._id !== dishId);
       setDishes(newList);
     } else if (actionEvent === "Add") {
-      setDishes((prev) => [...prev, newDish]);
+      setDishes((prev) => [...prev, dishObject]);
+    } else if (actionEvent === "Edit") {
+      const newList = dishes.map((dish) => {
+        if (dish._id === dishId) {
+          dish.name = dishObject.name;
+          dish.description = dishObject.description;
+          dish.price = dishObject.price;
+          dish.image = dishObject.image;
+          dish.awsKey = dishObject.awsKey;
+          dish.updatedAt = dishObject.updatedAt;
+        }
+
+        return dish;
+      });
+
+      setDishes(newList);
     } else {
       return toast.error("Could not update dish list. Unknown action event");
     }
@@ -54,7 +78,14 @@ const RestaurantDishes = () => {
       <></>
     ) : (
       dishes?.map((dish, index) => {
-        return <Dish key={index} dishData={dish} listSetter={listSetter} />;
+        return (
+          <Dish
+            key={index}
+            dishData={dish}
+            listSetter={listSetter}
+            onEdit={onEditDishToggler}
+          />
+        );
       })
     );
 
@@ -63,7 +94,11 @@ const RestaurantDishes = () => {
       <div>
         <h3>My Dishes</h3>
         {isFormOpen ? (
-          <DishForm formToggler={toggleForm} listSetter={listSetter} />
+          <DishForm
+            formToggler={toggleForm}
+            listSetter={listSetter}
+            dishObject={targetDish}
+          />
         ) : (
           <>
             <button className={styles.button} onClick={toggleForm}>
