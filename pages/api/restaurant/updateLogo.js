@@ -1,7 +1,6 @@
 import connectDb from "../../../config/connectDb";
 import Restaurant from "../../../models/restaurantModel";
 import verifyJwt from "../../../middlewares/verifyJWT";
-import aws from "aws-sdk";
 
 /**
  * @desc   Update logo
