@@ -15,7 +15,7 @@ const About = () => {
     },
     {
       name: "API Approach",
-      content: "REST, using embedded NextJS API",
+      content: "REST",
     },
     {
       name: "API Documentation",
@@ -27,7 +27,7 @@ const About = () => {
     },
     {
       name: "Secondary Storage",
-      content: "AWS S3 for images or media content",
+      content: "AWS S3",
     },
     {
       name: "Payment Getaway",
@@ -35,16 +35,12 @@ const About = () => {
     },
     {
       name: "Authorization and Authentication",
-      content: "Access and Refresh JWT Tokens",
+      content: "JSON Web Tokens",
     },
     {
       name: "Important libraries",
       content:
-        "@aws-sdk/s3-client, mongoose, stripe, next-cookies, next-swagger-docs",
-    },
-    {
-      name: "Styles",
-      content: "My own css, with the exception of the stripe checkout form",
+        "@aws-sdk/s3-client, mongoose, stripe, cookies-next, next-swagger-docs",
     },
   ];
 
