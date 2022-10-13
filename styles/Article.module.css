@@ -1,0 +1,28 @@
+.article {
+  margin: 10px 0;
+}
+
+.title {
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+.paragraph {
+  font-size: 1.1rem;
+}
+
+.list {
+  all: unset;
+}
+
+.list_item {
+  margin: 10px 0;
+}
+
+.name {
+  font-weight: bold;
+}
+
+.content {
+  color: var(--color-secondary);
+}

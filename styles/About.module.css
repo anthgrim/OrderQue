@@ -1,0 +1,25 @@
+.main {
+  padding: 5px 130px;
+  margin: 15px 0;
+}
+
+.section {
+  display: flex;
+  flex-direction: column;
+}
+
+.links_container {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.link {
+  color: var(--color-hightlight);
+}
+
+@media (max-width: 820px) {
+  .main {
+    padding: 5px 30px;
+  }
+}
