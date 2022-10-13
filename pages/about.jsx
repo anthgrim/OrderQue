@@ -53,7 +53,7 @@ const About = () => {
       <section className={styles.section}>
         <Article
           title="About this project"
-          textContent="This project is the final capstone of the MIT - Full Stack Development With MERN Stack. The restaurant application consists on building the basics of an eCommerce-like Web App, that allows it users to order dishes from a list of restaurants. Each restaurant has different dishes, prices, and much more."
+          textContent="This project is the final capstone of the MIT - Full Stack Development With MERN. The restaurant application consists on building the basics of an eCommerce-like Web App, that allows it users to order dishes from a list of restaurants. Each restaurant has different dishes, prices, and much more."
         />
         <Article
           title="What can you do in OrderQue?"
