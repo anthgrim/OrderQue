@@ -21,9 +21,11 @@ import jwt from "jsonwebtoken";
  *      components:
  *        securitySchemes:
  *          cookieAuth:
- *            type: apiKey
+ *            type: token
  *            in: cookie
  *            name: token
+ *      security:
+ *        - cookieAuth: []
  *      responses:
  *        200:
  *          description: OK - Access Token

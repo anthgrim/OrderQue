@@ -18,6 +18,14 @@ import verifyJwt from "../../../middlewares/verifyJWT";
  *    post:
  *      tags: [Order]
  *      summary: Creates a new Order
+ *      components:
+ *        securitySchemes:
+ *          cookieAuth:
+ *            type: token
+ *            in: cookie
+ *            name: token
+ *      security:
+ *        - cookieAuth: []
  *      requestBody:
  *       content:
  *        application/json:
@@ -27,9 +35,9 @@ import verifyJwt from "../../../middlewares/verifyJWT";
  *              restaurantId:
  *                type: string
  *              date:
- *                type: date
+ *                type: Date
  *              total:
- *                type: double
+ *                type: number
  *              dishes:
  *                type: array
  *            required:

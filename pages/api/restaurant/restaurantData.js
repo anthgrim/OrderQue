@@ -18,6 +18,14 @@ import verifyJWT from "../../../middlewares/verifyJWT";
  *    get:
  *      tags: [Restaurant]
  *      summary: Get restaurant information
+ *      components:
+ *        securitySchemes:
+ *          cookieAuth:
+ *            type: token
+ *            in: cookie
+ *            name: token
+ *      security:
+ *        - cookieAuth: []
  *      responses:
  *        200:
  *          description: Restaurant Object

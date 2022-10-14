@@ -20,6 +20,14 @@ import { S3Client } from "@aws-sdk/client-s3";
  *    delete:
  *      tags: [Restaurant]
  *      summary: Deletes current aws key for image
+ *      components:
+ *        securitySchemes:
+ *          cookieAuth:
+ *            type: token
+ *            in: cookie
+ *            name: token
+ *      security:
+ *        - cookieAuth: []
  *      responses:
  *        200:
  *          description: OK

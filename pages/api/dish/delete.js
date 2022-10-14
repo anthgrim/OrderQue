@@ -20,6 +20,14 @@ import { S3Client } from "@aws-sdk/client-s3";
  *    delete:
  *      tags: [Dish]
  *      summary: Delete dish by dish id
+ *      components:
+ *        securitySchemes:
+ *          cookieAuth:
+ *            type: token
+ *            in: cookie
+ *            name: token
+ *      security:
+ *        - cookieAuth: []
  *      requestBody:
  *       content:
  *        application/json:

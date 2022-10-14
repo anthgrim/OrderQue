@@ -18,6 +18,14 @@ import verifyJwt from "../../../middlewares/verifyJWT";
  *    put:
  *      tags: [Dish]
  *      summary: Update dish by id
+ *      components:
+ *        securitySchemes:
+ *          cookieAuth:
+ *            type: token
+ *            in: cookie
+ *            name: token
+ *      security:
+ *        - cookieAuth: []
  *      requestBody:
  *       content:
  *        application/json:

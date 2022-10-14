@@ -21,9 +21,11 @@ import cookie from "cookie";
  *      components:
  *        securitySchemes:
  *          cookieAuth:
- *            type: apiKey
+ *            type: token
  *            in: cookie
  *            name: token
+ *      security:
+ *        - cookieAuth: []
  *      responses:
  *        204:
  *          description: OK, no content

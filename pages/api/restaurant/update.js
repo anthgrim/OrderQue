@@ -18,6 +18,14 @@ import verifyJwt from "../../../middlewares/verifyJWT";
  *    put:
  *      tags: [Restaurant]
  *      summary: Updates name and description of the restaurant
+ *      components:
+ *        securitySchemes:
+ *          cookieAuth:
+ *            type: token
+ *            in: cookie
+ *            name: token
+ *      security:
+ *        - cookieAuth: []
  *      requestBody:
  *       content:
  *        application/json:
