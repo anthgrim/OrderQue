@@ -32,7 +32,10 @@ const Navbar = () => {
       : cart.reduce((prev, curr) => prev + curr.quantity, 0);
 
   const signOutAction = async () => {
-    await axios.post("/api/user/signOut");
+    const endpoint =
+      accountType === "User" ? "/api/user/signOut" : "/api/restaurant/signOut";
+
+    await axios.post(endpoint);
     if (typeof window !== "undefined") {
       localStorage.removeItem("currentUser");
       localStorage.removeItem("accountType");

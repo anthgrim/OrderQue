@@ -58,7 +58,6 @@ export default async function handler(req, res) {
     const targetUSer = await User.findOne({ refreshToken: jwt }).exec();
 
     if (!targetUSer) {
-      console.log("No User");
       res.setHeader(
         "Set-Cookie",
         cookie.serialize("token", "", {
