@@ -66,6 +66,10 @@
   color: var(--color-secondary);
 }
 
+.error {
+  color: var(--color-error);
+}
+
 .image {
   width: 300px;
   height: 300px;

@@ -25,6 +25,10 @@
   color: var(--color-secondary);
 }
 
+.error {
+  color: var(--color-error);
+}
+
 .button {
   padding: 5px;
   width: 40%;

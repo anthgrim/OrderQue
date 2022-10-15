@@ -6,6 +6,10 @@ import { toast } from "react-toastify";
 
 const RestaurantInfo = () => {
   const [restaurantData, setRestaurantData] = useState({});
+  const [error, setError] = useState({
+    name: { error: "", isError: false },
+    description: { error: "", isError: false },
+  });
   const [imageURL, setImageURL] = useState("");
   let { FileInput, openFileDialog, uploadToS3 } = useS3Upload();
   const axiosPrivate = useAxiosPrivate();
@@ -40,11 +44,36 @@ const RestaurantInfo = () => {
   // Handle restaurant information update
   const handleUpdate = async () => {
     const { name, description } = restaurantData;
+    let errors = false;
 
     // Validate inputs
-    if (name.trim() === "" || description.trim() === "") {
-      return toast.error("Restaurant information cannot be empty");
+    // Name
+    if (!name || name.trim() === "") {
+      errors = true;
+      setError((prev) => ({
+        ...prev,
+        name: { error: "Name cannot be empty", isError: true },
+      }));
+    } else {
+      setError((prev) => ({ ...prev, name: { error: "", isError: false } }));
     }
+
+    // Description
+    if (!description || description.trim() === "") {
+      errors = true;
+      setError((prev) => ({
+        ...prev,
+        description: { error: "Description cannot be empty", isError: true },
+      }));
+    } else {
+      setError((prev) => ({
+        ...prev,
+        description: { error: "", isError: false },
+      }));
+    }
+
+    // Return if there's any errors
+    if (error) return;
 
     try {
       const response = await axiosPrivate.put("/api/restaurant/update", {
@@ -107,6 +136,9 @@ const RestaurantInfo = () => {
               value={restaurantData?.name || ""}
               onChange={(e) => handleChange(e)}
             />
+            {error.name.isError && (
+              <span className={styles.error}>{error.name.error}</span>
+            )}
           </div>
           <div className={styles.section}>
             <label className={styles.label} htmlFor="description">
@@ -120,6 +152,9 @@ const RestaurantInfo = () => {
               value={restaurantData?.description || ""}
               onChange={(e) => handleChange(e)}
             />
+            {error.description.isError && (
+              <span className={styles.error}>{error.description.error}</span>
+            )}
           </div>
         </div>
         <section className={styles.section}>

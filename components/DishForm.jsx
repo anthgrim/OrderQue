@@ -9,6 +9,13 @@ const DishForm = ({ formToggler, listSetter, dishObject }) => {
   const axiosPrivate = useAxiosPrivate();
   const [isNewImage, setIsNewImage] = useState(false);
   const [isEdit, setIsEdit] = useState(false);
+  const [error, setError] = useState({
+    name: { error: "", isError: false },
+    description: { error: "", isError: false },
+    price: { error: "", isError: false },
+    image: { error: "", isError: false },
+    awsKey: { error: "", isError: false },
+  });
   const [formData, setFormData] = useState({
     name: "",
     description: "",
@@ -49,19 +56,65 @@ const DishForm = ({ formToggler, listSetter, dishObject }) => {
 
   const handleSubmit = async () => {
     const { name, description, price, image, awsKey } = formData;
+    let errors = false;
 
-    if (
-      name.trim() === "" ||
-      description.trim() === "" ||
-      image.trim() === "" ||
-      awsKey.trim() === ""
-    ) {
-      return toast.error("Name, description, and the images cannot be empty");
+    // Input validations
+    // Empty inputs
+    // Name
+    if (!name || name.trim() === "") {
+      errors = true;
+      setError((prev) => ({
+        ...prev,
+        name: { error: "Dish name is required", isError: true },
+      }));
+    } else {
+      setError((prev) => ({ ...prev, name: { error: "", isError: false } }));
     }
 
-    if (price === 0) {
-      return toast.error("Price must be greater than $0.00");
+    // Description
+    if (!description || description.trim() === "") {
+      errors = true;
+      setError((prev) => ({
+        ...prev,
+        description: { error: "Dish description is required", isError: true },
+      }));
+    } else {
+      setError((prev) => ({
+        ...prev,
+        description: { error: "", isError: false },
+      }));
     }
+
+    // Price
+    if (!price || price === 0) {
+      errors = true;
+      setError((prev) => ({
+        ...prev,
+        price: {
+          error: "Dish price must be greater than $0.00",
+          isError: true,
+        },
+      }));
+    } else {
+      setError((prev) => ({ ...prev, price: { error: "", isError: false } }));
+    }
+
+    // Price
+    if (image === "" || awsKey === "") {
+      errors = true;
+      setError((prev) => ({
+        ...prev,
+        image: {
+          error: "You must update an image",
+          isError: true,
+        },
+      }));
+    } else {
+      setError((prev) => ({ ...prev, image: { error: "", isError: false } }));
+    }
+
+    // Return if there's any errors
+    if (errors) return;
 
     try {
       let response;
@@ -147,6 +200,9 @@ const DishForm = ({ formToggler, listSetter, dishObject }) => {
           value={formData.name}
           onChange={(e) => handleChange(e)}
         />
+        {error.name.isError && (
+          <span className={styles.error}>{error.name.error}</span>
+        )}
       </div>
       <div className={styles.form_row}>
         <label className={styles.label} htmlFor="description">
@@ -160,6 +216,9 @@ const DishForm = ({ formToggler, listSetter, dishObject }) => {
           value={formData.description}
           onChange={(e) => handleChange(e)}
         />
+        {error.description.isError && (
+          <span className={styles.error}>{error.description.error}</span>
+        )}
       </div>
       <div className={styles.form_row}>
         <label className={styles.label} htmlFor="price">
@@ -173,11 +232,17 @@ const DishForm = ({ formToggler, listSetter, dishObject }) => {
           value={formData.price}
           onChange={(e) => handleChange(e)}
         />
+        {error.price.isError && (
+          <span className={styles.error}>{error.price.error}</span>
+        )}
       </div>
       <div className={styles.form_row}>
         <label className={styles.label} htmlFor="image">
           Dish Image
         </label>
+        {error.image.isError && (
+          <span className={styles.error}>{error.image.error}</span>
+        )}
         <FileInput onChange={handleFileChange} />
         <button className={styles.button} onClick={openFileDialog}>
           Update Logo
