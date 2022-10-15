@@ -20,9 +20,23 @@ const date = (date) => {
   return new Intl.DateTimeFormat("en-us").format(newDate);
 };
 
+/**
+ *
+ * @param {string} value
+ * @returns {boolean} true or false
+ */
+const validateEmailFormat = (value) => {
+  if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(value)) {
+    return true;
+  }
+
+  return false;
+};
+
 const formatter = {
   currency,
   date,
+  validateEmailFormat,
 };
 
 export default formatter;

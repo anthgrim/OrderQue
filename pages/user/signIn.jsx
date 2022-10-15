@@ -4,10 +4,21 @@ import Link from "next/link";
 import axios from "axios";
 import useAuth from "../../hooks/useAuth";
 import { toast } from "react-toastify";
+import formatter from "../../utils/formatter";
 import styles from "../../styles/Forms.module.css";
 
 const SignInUser = () => {
   const { setAuth, setCurrentUser } = useAuth();
+  const [error, setError] = useState({
+    email: {
+      error: "",
+      isError: false,
+    },
+    password: {
+      error: "",
+      isError: false,
+    },
+  });
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -22,10 +33,55 @@ const SignInUser = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    // Input validation
+    const { email, password } = formData;
+    let errors = false;
+
+    // Email
+    if (!email || email.trim() === "") {
+      errors = true;
+      setError((prev) => ({
+        ...prev,
+        email: { error: "Email is required", isError: true },
+      }));
+    } else {
+      setError((prev) => ({ ...prev, email: { error: "", isError: false } }));
+    }
+
+    // Verified valid email
+    const isEmailValid = formatter.validateEmailFormat(email);
+
+    if (!isEmailValid) {
+      errors = true;
+      setError((prev) => ({
+        ...prev,
+        email: { error: "Please enter a valid email address", isError: true },
+      }));
+    } else {
+      setError((prev) => ({ ...prev, email: { error: "", isError: false } }));
+    }
+
+    // Validate password
+    if (!password || password.trim() === "") {
+      errors = true;
+      setError((prev) => ({
+        ...prev,
+        password: { error: "Password is required", isError: true },
+      }));
+    } else {
+      setError((prev) => ({
+        ...prev,
+        password: { error: "", isError: false },
+      }));
+    }
+
+    // Return if there's any errors
+    if (errors) return;
+
     try {
       const res = await axios.post("/api/user/signIn", {
-        email: formData.email,
-        password: formData.password,
+        email,
+        password,
       });
 
       setAuth({ accessToken: res.data.accessToken });
@@ -46,8 +102,8 @@ const SignInUser = () => {
         <div className={styles.form_title_container}>
           <span className={styles.form_title}>User Sign In</span>
         </div>
-        <div className={styles.form_container}>
-          <form className={styles.form}>
+        <form className={styles.form_container}>
+          <div className={styles.form}>
             <div className={styles.form_row}>
               <label className={styles.form_label} htmlFor="email">
                 Email
@@ -61,6 +117,9 @@ const SignInUser = () => {
                 onChange={(e) => handleChange(e)}
                 value={formData.email}
               />
+              {error.email.isError && (
+                <span className={styles.error}>{error.email.error}</span>
+              )}
             </div>
             <div className={styles.form_row}>
               <label className={styles.form_label} htmlFor="password">
@@ -75,6 +134,9 @@ const SignInUser = () => {
                 onChange={(e) => handleChange(e)}
                 value={formData.password}
               />
+              {error.password.isError && (
+                <span className={styles.error}>{error.password.error}</span>
+              )}
             </div>
             <div>
               <button
@@ -92,8 +154,8 @@ const SignInUser = () => {
                 </Link>
               </p>
             </div>
-          </form>
-        </div>
+          </div>
+        </form>
       </div>
     </div>
   );
