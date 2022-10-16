@@ -40,7 +40,7 @@ const About = () => {
     {
       name: "Important libraries",
       content:
-        "@aws-sdk/s3-client, mongoose, stripe, cookies-next, next-swagger-docs",
+        "@aws-sdk/s3-client, mongoose, stripe, cookies-next, next-swagger-docs, general-formatter",
     },
   ];
 
