@@ -1,7 +1,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import axios from "axios";
-import formatter from "../../utils/formatter";
+import generalFormatter from "general-formatter";
 import styles from "../../styles/Forms.module.css";
 import Router from "next/router";
 import { toast } from "react-toastify";
@@ -110,7 +110,7 @@ const SignInUser = () => {
     }
 
     // Verified valid email
-    const isEmailValid = formatter.validateEmailFormat(email);
+    const isEmailValid = generalFormatter.validateEmailFormat(email);
     if (!isEmailValid) {
       errors = true;
       setError((prev) => ({

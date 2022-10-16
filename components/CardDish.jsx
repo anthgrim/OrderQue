@@ -1,5 +1,5 @@
 import { useState } from "react";
-import formatter from "../utils/formatter";
+import generalFormatter from "general-formatter";
 import styles from "../styles/Card.module.css";
 import useData from "../hooks/useData";
 import { toast } from "react-toastify";
@@ -50,7 +50,12 @@ const CardDish = ({ dishData }) => {
         <h2>{dishData.name}</h2>
         <p className={styles.card_description}>{dishData.description}</p>
         <h4 className={styles.card_price}>
-          {formatter.currency(dishData?.price)}
+          {generalFormatter.convertToMoneyString(
+            dishData?.price,
+            "en-US",
+            "currency",
+            "USD"
+          )}
         </h4>
         <div className={styles.card_actions}>
           <button className={styles.card_action_button} onClick={decrease}>

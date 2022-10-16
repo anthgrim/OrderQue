@@ -1,6 +1,6 @@
 import { useState } from "react";
 import useData from "../../hooks/useData";
-import formatter from "../../utils/formatter";
+import generalFormatter from "general-formatter";
 import CartItemsList from "../../components/CartItemsList";
 import CheckOutForm from "../../components/CheckOutForm";
 import { loadStripe } from "@stripe/stripe-js";
@@ -27,7 +27,12 @@ const MyCart = ({ stripeKey }) => {
         <div className={styles.cart_item_totals}>
           <span>Total: </span>
           <span className={styles.cart_total}>
-            {formatter.currency(totalCartItem)}
+            {generalFormatter.convertToMoneyString(
+              totalCartItem,
+              "en-US",
+              "currency",
+              "USD"
+            )}
           </span>
         </div>
         {cart.length > 0 ? (

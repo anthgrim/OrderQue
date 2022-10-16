@@ -1,5 +1,5 @@
 import useData from "../hooks/useData";
-import formatter from "../utils/formatter";
+import generalFormatter from "general-formatter";
 import styles from "../styles/Cart.module.css";
 
 const CartItem = ({ itemData }) => {
@@ -39,10 +39,22 @@ const CartItem = ({ itemData }) => {
         </div>
       </div>
       <div className={styles.cart_item_total}>
-        <span>{formatter.currency(itemData.price)}</span>
+        <span>
+          {generalFormatter.convertToMoneyString(
+            itemData.price,
+            "en-US",
+            "currency",
+            "USD"
+          )}
+        </span>
       </div>
       <div className={styles.cart_item_total}>
-        {formatter.currency(itemData.total)}
+        {generalFormatter.convertToMoneyString(
+          itemData.total,
+          "en-US",
+          "currency",
+          "USD"
+        )}
       </div>
     </div>
   );

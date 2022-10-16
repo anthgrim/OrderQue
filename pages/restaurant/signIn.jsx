@@ -3,7 +3,7 @@ import Router from "next/router";
 import Link from "next/link";
 import axios from "axios";
 import useAuth from "../../hooks/useAuth";
-import formatter from "../../utils/formatter";
+import generalFormatter from "general-formatter";
 import styles from "../../styles/Forms.module.css";
 import { toast } from "react-toastify";
 
@@ -58,7 +58,7 @@ const SignIn = () => {
     }
 
     // Verified valid email
-    const isEmailValid = formatter.validateEmailFormat(email);
+    const isEmailValid = generalFormatter.validateEmailFormat(email);
     if (!isEmailValid) {
       errors = true;
       setError((prev) => ({

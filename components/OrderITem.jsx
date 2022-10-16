@@ -1,13 +1,22 @@
 import React from "react";
-import formatter from "../utils/formatter";
+import generalFormatter from "general-formatter";
 import styles from "../styles/MyOrders.module.css";
 
 const OrderITem = ({ orderData }) => {
   return (
     <div className={styles.order}>
       <span>{orderData.number}</span>
-      <span>{formatter.date(orderData?.date) || ""}</span>
-      <span>{formatter.currency(orderData?.total) || ""}</span>
+      <span>
+        {generalFormatter.convertToDateString(orderData?.date, "en-US") || ""}
+      </span>
+      <span>
+        {generalFormatter.convertToMoneyString(
+          orderData?.total,
+          "en-US",
+          "currency",
+          "USD"
+        ) || ""}
+      </span>
     </div>
   );
 };

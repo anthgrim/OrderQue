@@ -4,7 +4,7 @@ import Link from "next/link";
 import axios from "axios";
 import useAuth from "../../hooks/useAuth";
 import { toast } from "react-toastify";
-import formatter from "../../utils/formatter";
+import generalFormatter from "general-formatter";
 import styles from "../../styles/Forms.module.css";
 
 const SignInUser = () => {
@@ -49,7 +49,7 @@ const SignInUser = () => {
     }
 
     // Verified valid email
-    const isEmailValid = formatter.validateEmailFormat(email);
+    const isEmailValid = generalFormatter.validateEmailFormat(email);
 
     if (!isEmailValid) {
       errors = true;
