@@ -1,5 +1,6 @@
 import useAuth from "../hooks/useAuth";
 import { useRouter } from "next/router";
+import Image from "next/image";
 import Router from "next/router";
 import { toast } from "react-toastify";
 import styles from "../styles/Card.module.css";
@@ -23,11 +24,15 @@ const Card = ({ restaurantData }) => {
   return (
     <div className={styles.card}>
       <div className={styles.image_container}>
-        <img
-          className={styles.card_image}
-          src={restaurantData.image}
-          alt="restaurantImage"
-        />
+        {restaurantData?.image && (
+          <Image
+            src={restaurantData.image}
+            width="260px"
+            height="250px"
+            loading="lazy"
+            alt="Restaurant Image"
+          />
+        )}
       </div>
       <div className={styles.card_content}>
         <h2>{restaurantData.name}</h2>

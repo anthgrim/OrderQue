@@ -1,4 +1,5 @@
 import useData from "../hooks/useData";
+import Image from "next/image";
 import generalFormatter from "general-formatter";
 import styles from "../styles/Cart.module.css";
 
@@ -7,9 +8,11 @@ const CartItem = ({ itemData }) => {
   return (
     <div className={styles.cart_item}>
       <div className={styles.cart_item_image_container}>
-        <img
-          className={styles.cart_item_image}
+        <Image
           src={itemData.image}
+          width="75px"
+          height="75px"
+          loading="lazy"
           alt="Dish Image"
         />
       </div>
@@ -17,6 +20,14 @@ const CartItem = ({ itemData }) => {
         <span className={styles.cart_item_name}>{itemData.name}</span>
         <span className={styles.cart_item_description}>
           {itemData.description}
+        </span>
+        <span className={styles.mobile_UnitPrice}>
+          {generalFormatter.convertToMoneyString(
+            itemData.price,
+            "en-US",
+            "currency",
+            "USD"
+          )}
         </span>
       </div>
       <div className={styles.cart_item_quantity}>
@@ -38,7 +49,7 @@ const CartItem = ({ itemData }) => {
           </button>
         </div>
       </div>
-      <div className={styles.cart_item_total}>
+      <div className={styles.cart_item_price}>
         <span>
           {generalFormatter.convertToMoneyString(
             itemData.price,

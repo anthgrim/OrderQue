@@ -2,6 +2,7 @@ import { useState } from "react";
 import generalFormatter from "general-formatter";
 import styles from "../styles/Card.module.css";
 import useData from "../hooks/useData";
+import Image from "next/image";
 import { toast } from "react-toastify";
 
 const CardDish = ({ dishData }) => {
@@ -40,11 +41,15 @@ const CardDish = ({ dishData }) => {
   return (
     <div className={styles.card}>
       <div className={styles.image_container}>
-        <img
-          className={styles.card_image}
-          src={dishData.image}
-          alt="dish image"
-        />
+        {dishData?.image && (
+          <Image
+            src={dishData.image}
+            width="260px"
+            height="250px"
+            loading="lazy"
+            alt="Dish Image"
+          />
+        )}
       </div>
       <div className={styles.card_content}>
         <h2>{dishData.name}</h2>
