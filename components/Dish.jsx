@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { AiFillEdit, AiFillDelete } from "react-icons/ai";
 import useAxiosPrivate from "../hooks/useAxiosPrivate";
 import generalFormatter from "general-formatter";
+import Image from "next/image";
 import Dialog from "./Dialog";
 import styles from "../styles/Admin.module.css";
 import { toast } from "react-toastify";
@@ -55,11 +56,15 @@ const Dish = ({ dishData, listSetter, onEdit }) => {
           ) || ""}
         </span>
         <div className={styles.dish_image_container}>
-          <img
-            className={styles.dish_image}
-            src={dishData?.image}
-            alt="Dish image"
-          />
+          {dishData?.image && (
+            <Image
+              src={dishData.image}
+              width="50px"
+              height="50px"
+              loading="lazy"
+              alt="Dish Image"
+            />
+          )}
         </div>
       </div>
       {isDialogOpen ? (

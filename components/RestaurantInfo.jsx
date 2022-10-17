@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import useAxiosPrivate from "../hooks/useAxiosPrivate";
+import Image from "next/image";
 import { useS3Upload } from "next-s3-upload";
 import styles from "../styles/Admin.module.css";
 import { toast } from "react-toastify";
@@ -165,7 +166,15 @@ const RestaurantInfo = () => {
           <button className={styles.button_sm} onClick={openFileDialog}>
             Update Logo
           </button>
-          <img className={styles.image} src={imageURL} alt="restaurant image" />
+          {imageURL && (
+            <Image
+              src={imageURL}
+              width="300px"
+              height="400px"
+              alt="restaurant image"
+              loading="lazy"
+            />
+          )}
         </section>
       </div>
     </>
