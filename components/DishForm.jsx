@@ -255,6 +255,7 @@ const DishForm = ({ formToggler, listSetter, dishObject }) => {
               width="250px"
               height="250px"
               loading="lazy"
+              alt="Dish Image"
             />
           )}
         </div>
