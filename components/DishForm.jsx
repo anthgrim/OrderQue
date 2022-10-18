@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useS3Upload } from "next-s3-upload";
 import useAxiosPrivate from "../hooks/useAxiosPrivate";
+import Image from "next/image";
 import { toast } from "react-toastify";
 import styles from "../styles/DishForm.module.css";
 
@@ -245,13 +246,18 @@ const DishForm = ({ formToggler, listSetter, dishObject }) => {
         )}
         <FileInput onChange={handleFileChange} />
         <button className={styles.button} onClick={openFileDialog}>
-          Update Logo
+          Update Dish Image
         </button>
-        <img
-          className={styles.image}
-          src={formData.image}
-          alt="restaurant image"
-        />
+        <div>
+          {formData.image && (
+            <Image
+              src={formData.image}
+              width="250px"
+              height="250px"
+              loading="lazy"
+            />
+          )}
+        </div>
       </div>
     </div>
   );
