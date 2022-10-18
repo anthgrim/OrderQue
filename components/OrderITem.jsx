@@ -2,10 +2,13 @@ import React from "react";
 import generalFormatter from "general-formatter";
 import styles from "../styles/MyOrders.module.css";
 
-const OrderITem = ({ orderData }) => {
+const OrderITem = ({ orderData, onFocus }) => {
   return (
     <div className={styles.order}>
-      <span>{orderData.number}</span>
+      <span className={styles.pointer} onClick={() => onFocus(orderData)}>
+        {orderData.number}
+      </span>
+      <span>{orderData.restaurantName || ""}</span>
       <span>
         {generalFormatter.convertToDateString(orderData?.date, "en-US") || ""}
       </span>

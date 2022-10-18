@@ -12,6 +12,10 @@ const orderSchema = new Schema(
       ref: "Restaurant",
       required: true,
     },
+    restaurantName: {
+      type: String,
+      required: true,
+    },
     number: {
       type: String,
       required: true,

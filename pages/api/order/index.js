@@ -1,5 +1,6 @@
 import connectDb from "../../../config/connectDb";
 import Order from "../../../models/orderModel";
+import Restaurant from "../../../models/restaurantModel";
 import verifyJwt from "../../../middlewares/verifyJWT";
 
 /**
@@ -87,10 +88,14 @@ const handler = async (req, res) => {
     let number = Math.floor(Math.random() * 10000);
     number = number + "ORD";
 
+    // Get restaurant name
+    const restaurant = await Restaurant.findById(restaurantId).exec();
+
     // Create new order
     const newOrder = await Order.create({
       userId,
       restaurantId,
+      restaurantName: restaurant.name,
       number,
       date,
       total,

@@ -1,0 +1,39 @@
+.order_container {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.row {
+  display: flex;
+}
+
+.label {
+  font-weight: bold;
+  flex: 25%;
+  color: var(--color-secondary);
+}
+
+.focused_text {
+  flex: 75%;
+  font-size: 1.1rem;
+  color: var(--color-hightlight);
+}
+
+.list {
+  margin: 1.1rem 0;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.item_line {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+}
+
+.item_line_headers {
+  font-weight: bold;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+}
