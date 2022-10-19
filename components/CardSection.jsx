@@ -54,7 +54,7 @@ const CardSection = (props) => {
             font-weight: 600;
             text-transform: uppercase;
             letter-spacing: 0.025em;
-            background-color: #6772e5;
+            background-color: var(--color-primary);
             text-decoration: none;
             -webkit-transition: all 150ms ease;
             transition: all 150ms ease;
@@ -64,7 +64,7 @@ const CardSection = (props) => {
           .button-stripe:hover {
             color: #fff;
             cursor: pointer;
-            background-color: #7795f8;
+            background-color: var(--color-hightlight);
             transform: translateY(-1px);
             box-shadow: 0 7px 14px rgba(50, 50, 93, 0.1),
               0 3px 6px rgba(0, 0, 0, 0.08);

@@ -5,10 +5,14 @@ import useAxiosPrivate from "../hooks/useAxiosPrivate";
 import useData from "../hooks/useData";
 import useAuth from "../hooks/useAuth";
 import CardSection from "./CardSection";
-import styles from "../styles/CheckOutForm.module.css";
 import { toast } from "react-toastify";
 
 const CheckOutForm = ({ total }) => {
+  const [formErrors, setFormErrors] = useState({
+    address: { error: "", isError: false },
+    city: { error: "", isError: false },
+    state: { error: "", isError: false },
+  });
   const [error, setError] = useState("");
   const [formData, setFormData] = useState({
     address: "",
@@ -26,13 +30,52 @@ const CheckOutForm = ({ total }) => {
   };
 
   const submitOrder = async () => {
-    if (
-      formData.address === "" ||
-      formData.city === "" ||
-      formData.state === ""
-    ) {
-      return toast.error("Please add billing information");
+    const { address, city, state } = formData;
+    let errors = false;
+
+    // Validate address
+    if (!address || address.trim() === "") {
+      errors = true;
+      setFormErrors((prev) => ({
+        ...prev,
+        address: { error: "Address is required", isError: true },
+      }));
+    } else {
+      setFormErrors((prev) => ({
+        ...prev,
+        address: { error: "", isError: false },
+      }));
     }
+
+    // Validate city
+    if (!city || city.trim() === "") {
+      errors = true;
+      setFormErrors((prev) => ({
+        ...prev,
+        city: { error: "City is required", isError: true },
+      }));
+    } else {
+      setFormErrors((prev) => ({
+        ...prev,
+        city: { error: "", isError: false },
+      }));
+    }
+
+    // Validate State
+    if (!state || state.trim() === "") {
+      errors = true;
+      setFormErrors((prev) => ({
+        ...prev,
+        state: { error: "State is required", isError: true },
+      }));
+    } else {
+      setFormErrors((prev) => ({
+        ...prev,
+        state: { error: "", isError: false },
+      }));
+    }
+
+    if (errors) return;
 
     try {
       const cardElement = elements.getElement(CardElement);
@@ -71,16 +114,25 @@ const CheckOutForm = ({ total }) => {
         <div style={{ flex: "0.90", marginRight: "0" }}>
           <Label>Address</Label>
           <Input name="address" onChange={(e) => handleChange(e)} />
+          {formErrors.address.isError && (
+            <span className="error">{formErrors.address.error}</span>
+          )}
         </div>
       </FormGroup>
       <FormGroup style={{ display: "flex" }}>
         <div style={{ flex: "0.65", marginRight: "0" }}>
           <Label>City</Label>
           <Input name="city" onChange={(e) => handleChange(e)} />
+          {formErrors.city.isError && (
+            <span className="error">{formErrors.city.error}</span>
+          )}
         </div>
         <div style={{ flex: "0.25", marginRight: 0 }}>
           <Label>State</Label>
           <Input name="state" onChange={(e) => handleChange(e)} />
+          {formErrors.state.isError && (
+            <span className="error">{formErrors.state.error}</span>
+          )}
         </div>
       </FormGroup>
 
@@ -113,6 +165,10 @@ const CheckOutForm = ({ total }) => {
             width: 70%;
             box-sizing: border-box;
             padding: 0 5px;
+          }
+
+          .error {
+            color: var(--color-error);
           }
 
           label {

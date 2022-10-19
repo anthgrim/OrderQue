@@ -45,7 +45,7 @@ const Navbar = () => {
     setCart([]);
     setTimeout(() => {
       router.push("/");
-    }, 200);
+    }, 400);
     return toast.success("See you next time!");
   };
 
