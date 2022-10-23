@@ -74,7 +74,7 @@ const RestaurantInfo = () => {
     }
 
     // Return if there's any errors
-    if (error) return;
+    if (errors) return;
 
     try {
       const response = await axiosPrivate.put("/api/restaurant/update", {
