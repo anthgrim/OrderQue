@@ -72,27 +72,27 @@ Once you have set up the environment variables, you can safely run the applicati
 
 ### Home and Restaurant List
 
-![Home](https://bl6pap004files.storage.live.com/y4mNa-yrUk3du3g7qFEhDwvJf8vcmKc7u5ebm_-V8IddwnasMZlA44GUXQ-OV4-hqPFhC1zuP7-FnaukQU9OhSrw8CQ9ivvf7nPWXktM44OVZkw2l6JUfK5NpdKQSKYLla8bb8XsJlhI5_xU89ZmnGeAL1qUlQV5ogdMc3jZX-jc2FDtj3TtCK6xGW3_F1xqPxYKCqnMiBNTqAyplbwYSxC2fMAVh6HWMOd2xHsoIrJhks?encodeFailures=1&width=1688&height=833)
+![Home](./public/Home.png)
 
-![RestaurantList](https://bl6pap004files.storage.live.com/y4mndhYOPQTb1cOz2jZKu5G1V9PtH0NrfAOhQdSeFLNT7bhvL1Gg3kp0ThpdfnVOy7jJ2leYIb06bRmTwkMM5jwtiKmhX0SzEoaXu4hN8CaeyXCDTpiiYJKdC4-NaP5--L3YnvtFd6k-r0iChuTuvW3U5ZAuig2THVzaZutoXU61YRIzpEHKVNplhTkEh_vHs_CyBhvECUCMPTcxZKdnkH-p1wv3Ygzh_lpbIYnBoUyvx0?encodeFailures=1&width=1701&height=635)
+![RestaurantList](./public/Home-restaurants.png)
 
 ### Restaurant Dishes
 
-![RestaurantDishes](https://bl6pap004files.storage.live.com/y4mu4hQZG6mtCDWMP-NQVjeVm9FLbjqJzlxdA1xVuiVIbJ2DkNPcwU9qXlEctA7SSn03qBQycZY5ueZ0fDKxqR4CnvFEfq3xHR9AwzdIXxmf2inJhlGLZ0h-QWS4e_F6j73mXLtfUOyca43C1I1Rr_zLjjGzQV7MoUBIHLKGvJAxHv1PGGSEvlA0wjm616qsrlsgRXbGS1O0bdnyWtgA7oah7NjT5sSDgpp6bWqbqi1C_A?encodeFailures=1&width=1666&height=836)
+![RestaurantDishes](./public/Restaurant-dishes.png)
 
 ### Cart and Checkout
 
-![Cart](https://bl6pap004files.storage.live.com/y4mfpvRU8ryFhQcyVgGwkjebezIoGciwL_Gf5jM4E9JgZhfyGFbgzsYTzXMWxlS7D44MuXDMYH_x9fkz4AYuJGLDNQC0kEODiN2aVKzS09E2yd2pYCM7wWjqohAFmEzDwSWoFkZ2t2Hmcdhg3DaHbeYXtNhAzihWnVcT51TdR6WTxtWZrussAJf5mLSwGrEEkoy7WrCO6JCSYHWt-wz-xu2B2bxUd7YHSCu3OCVr4OpRuI?encodeFailures=1&width=1683&height=668)
+![Cart](./public/Cart.png)
 
-![checkout](https://bl6pap004files.storage.live.com/y4mznGAaEu5VoHWQfQzkwxI102AhUIiUR6Cy1IzK325y5NeXu0ksx2g4tskQyN7W3zQ8vMH_g7GVBniSOag2EF3DnvnZafrpcQlnIjNv8gpMu09GK4RzYivcY1uKpSCWzd1cp5LsFaVyDZDRx3AUS9drTkptHjBW5gTMGLN4VZdehiLxVVHqC-OP9NiYI0ynEXDNMxLS3-goa2j2OwE5jZZmDuBLX_CMwRAsQRbH47AaDo?encodeFailures=1&width=1005&height=724)
+![checkout](./public/Checkout.png)
 
 ### User Orders
 
-![UserOrders](https://bl6pap004files.storage.live.com/y4mP2U4w0zX5Lh3R7J-R935MW4TM1gGJr1-KSKSG5aevAp4Jtm7UxJXqlQuvoH9RG9kaIltAzXl3SQRU6w41NkmK1a-kxC6SFdWOeraMekzae2_Qwrwe7rsj2rcL5O_igcdGfSexS3qpFHO_eWfM8MgBvufRv6uqlqYjb17P8MJ7s-OP4fpisN0yAASIn6FhNH2nden0M0TlORkqDPghQLNpiZP6oJTcOe6Ghus4O0GI9w?encodeFailures=1&width=1659&height=621)
+![UserOrders](./public/MyOrders.png)
 
 ### Restaurant Admin
 
-![RestaurantAdmin](https://bl6pap004files.storage.live.com/y4memeJQAwqWyILYLvEPG8EWK_MAeQo5CAR9iPMQ0Sk1ljko5gCG79xSInFiSJsB37340GWJhch0aRHxamA85cUInfr-v2bCY0D2J9N725GKKz4YdmN50q1lUdX6N2os05s_fEP9xcQjk_FsSgagrlXtVA7HIRX-0b89Ol2nrE0Fo5946Q2s3gXkIw7s4wSK1Bl4mUUNdr6wj6g5EFvvKLI1XSAHXndB4yNTR0cXcESU-A?encodeFailures=1&width=1591&height=913)
+![RestaurantAdmin](./public/restaurant-admin.png)
 
 ## Author
 
