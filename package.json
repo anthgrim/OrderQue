@@ -17,7 +17,7 @@
     "cookie": "^0.5.0",
     "cookies-next": "^2.1.1",
     "general-formatter": "^0.0.15",
-    "jsonwebtoken": "^8.5.1",
+    "jsonwebtoken": "^9.0.0",
     "mongoose": "^6.6.1",
     "next": "12.3.1",
     "next-s3-upload": "^0.2.3",
