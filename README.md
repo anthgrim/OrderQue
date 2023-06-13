@@ -1,7 +1,7 @@
 # OrderQue.com (DEPRECATED)
 
 ### Note
-This site has been closed. Although the code sample is still functional.
+This site has been closed. Although the code sample is still functional. Follow instructions below to run locally
 
 ## Description
 
@@ -10,9 +10,6 @@ This is the final capstone project for the MIT - Full Stack Development with MER
 In this project in particular I decided to add a second functionality so users can not only sign up as a regular users, but also as a Restaurant entity. While logged in as a restaurant the users can create a restaurant space, add restaurant description and logo. Create, delete, and edit dishes to sell to the public.
 
 This gives the opportunity to the user to expirement the dynamism of selling products, in this case dishes.
-
-[Doc Requirements](https://1drv.ms/b/s!Aq3braK3qcmji0kTLnrXNQ3zvtAN?e=M9yBKt) |
-[MIT Presentation](https://1drv.ms/b/s!Aq3braK3qcmji0rog4cjKEI84mp5?e=oZWZOD)
 
 ## Functionalities
 
