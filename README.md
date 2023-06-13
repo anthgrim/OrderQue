@@ -1,4 +1,7 @@
-# OrderQue.com
+# OrderQue.com (DEPRECATED)
+
+### Note
+This site has been closed. Although the code sample is still functional.
 
 ## Description
 
